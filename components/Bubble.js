@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/native'
 import colors from '../constants/colors'
+import { borderRadius, fontWeights, shadows } from '../constants/style'
 
 const ButtonContainer = styled.TouchableHighlight`
     border: 1px solid ${({ isPressed, color }) => isPressed 
@@ -10,7 +11,7 @@ const ButtonContainer = styled.TouchableHighlight`
     display: flex;
     justify-content: center;
     align-self: flex-start;
-    border-radius: 45px;
+    border-radius: ${borderRadius.basic};
     background-color: ${({ isPressed, color }) => isPressed 
         ? color
         : colors.BASIC.WHITE
@@ -24,7 +25,7 @@ const StyledText = styled.Text`
         ? colors.BASIC.WHITE
         : color
     };
-    font-weight: 500;
+    font-weight: ${fontWeights.medium};
 `
 
 const Bubble = ({ 
