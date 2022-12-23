@@ -6,6 +6,7 @@ import { CardStyleInterpolators, TransitionPresets } from '@react-navigation/sta
 import Bubble from '../components/Bubble'
 import colors from '../constants/colors'
 import React from 'react'
+import AddButton from '../components/AddButton'
 
 const Stack = createNativeStackNavigator()
 
@@ -27,11 +28,17 @@ const AppStack = () => {
 
 const HomeScreen = ({navigation}) => {
   return (
-    <Bubble 
-      text={'your xx'} 
-      isPressed 
-      color={colors.ACCENTS.BURGUND}
-    />
+    <>
+      <Bubble 
+        text={'your xx'} 
+        isPressed 
+        color={colors.ACCENTS.PINK}
+      />
+      <AddButton 
+        
+        color={colors.ACCENTS.MINT}
+      />
+    </>
   )
 }
 
