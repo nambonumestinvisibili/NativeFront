@@ -16,5 +16,16 @@ rules: {
   'no-multi-spaces': ['error'],
   'semi': ['error', 'never'],
   'no-unused-vars': 'off',
-  'react/prop-types': 'off'
+  'react/prop-types': 'off',
+  'indent': ['error', 2],
+  "prettier/prettier": [
+    2,
+    {
+        "trailingComma": "es5",
+        "singleQuote": true,
+        "printWidth": 100,
+        "endOfLine": "lf"
+    }
+  ],
+  "max-len": [2, 100],
 }

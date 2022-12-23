@@ -25,14 +25,13 @@ const AppStack = () => {
   )
 }
 
-const StyledButton = styled.Button`
-    margin-top: 100px;
-    font-size: 40px;
-`
-
 const HomeScreen = ({navigation}) => {
   return (
-    <Bubble text={'your'} isPressed color={colors.ACCENTS.BURGUND}/>
+    <Bubble 
+      text={'your xx'} 
+      isPressed 
+      color={colors.ACCENTS.BURGUND}
+    />
   )
 }
 

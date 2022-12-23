@@ -1,7 +1,5 @@
 import 'react-native-gesture-handler'
-import { StatusBar } from 'expo-status-bar'
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
 import AppStack from './screens/AppStack'
 
 export default function App() {
@@ -9,12 +7,3 @@ export default function App() {
     <AppStack />
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-})
