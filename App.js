@@ -1,12 +1,13 @@
-import 'react-native-gesture-handler';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import AppStack from './screens/AppStack';
+import 'react-native-gesture-handler'
+import { StatusBar } from 'expo-status-bar'
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
+import AppStack from './screens/AppStack'
 
 export default function App() {
   return (
     <AppStack />
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -16,4 +17,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+})

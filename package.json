@@ -22,7 +22,9 @@
     "styled-components": "^5.3.6"
   },
   "devDependencies": {
-    "@babel/core": "^7.19.3"
+    "@babel/core": "^7.19.3",
+    "eslint": "^8.30.0",
+    "eslint-plugin-react": "^7.31.11"
   },
   "private": true
 }
