@@ -1,13 +1,14 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { Button, Text } from 'react-native'
+import { ScrollView, Text, View, ViewComponent } from 'react-native'
 import styled from 'styled-components/native'
-import { CardStyleInterpolators, TransitionPresets } from '@react-navigation/stack'
+import { TransitionPresets } from '@react-navigation/stack'
 import Bubble from '../components/Bubble'
 import colors from '../constants/colors'
 import React from 'react'
 import AddButton from '../components/AddButton'
 import StackNames from '../constants/stacks'
 import GoBackHeader from '../ui/styles/GoBackHeader'
+import ScreenHeader from '../ui/styles/ScreenHeader'
 
 const Stack = createNativeStackNavigator()
 
@@ -49,6 +50,20 @@ const AppStack = () => {
   )
 }
 
+const StyledView = styled.View`
+  margin: 14px 24px;
+`
+const ScreenWrapper = ({ children }) => {
+  return (
+    <StyledView>
+      <ScreenHeader text={"The Notting Hills"} />
+      <View>
+        { children }
+      </View>
+    </StyledView>
+  )
+}
+
 const StText = styled.Text`
   font-size: 90px;
 `
@@ -71,8 +86,49 @@ const HomeScreen = ({navigation}) => {
   )
 }
 
+export const BubbleSlide = ({ bubbles, touchable, color }) => {
+  return (
+    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+      {bubbles.map(bubble => (
+        <Bubble
+          color={color}
+          isPressed
+          text={bubble.text} 
+        />
+      ))}
+    </ScrollView>
+  )
+}
+
 const DetailedSiteScreen = ({navigation, route}) => {
-  return <Text>detailed screen</Text>
+  return (
+    <ScreenWrapper>
+      <BubbleSlide 
+        color={colors.ACCENTS.PINK}
+        bubbles={[
+          {
+            text: "Food",
+          },
+          {
+            text: "Fine dining",
+          },
+          {
+            text: "Stunning view",
+          },
+          {
+            text: "Free",
+          },
+          {
+            text: "Paid",
+          },
+          {
+            text: "Bubble1",
+          }
+        ]}
+        touchable={false}
+      />
+    </ScreenWrapper>
+    )
 }
 
 const SiteCreationScreen = () => {

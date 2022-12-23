@@ -10,12 +10,13 @@ const ButtonContainer = styled.TouchableHighlight`
   justify-content: center;
   align-self: flex-start;
   border-radius: ${borderRadius.basic};
+  margin: 0 3px;
 `
 
 const StyledText = styled.Text`
     ${InvertedColorsText}
     align-self: flex-start;
-    padding: 5px 10px;
+    padding: 5px 15px;
     font-weight: ${fontWeights.medium};
 `
 
