@@ -5,7 +5,7 @@ import ScreenWrapper from '../../../ui/layout/ScreenWrapper'
 
 const DetailedSiteScreen = ({navigation, route}) => {
   return (
-    <ScreenWrapper>
+    <ScreenWrapper navigation={navigation}>
       <BubbleSlide 
         color={colors.ACCENTS.PINK}
         bubbles={[

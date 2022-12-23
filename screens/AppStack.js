@@ -19,8 +19,8 @@ const AppStack = () => {
       // initialRouteName={StackNames.DetailedSiteScreen}
       screenOptions={({ navigation }) => ({
           ...TransitionPresets.ModalSlideFromBottomIOS,
-          cardOverlayEnabled: true,
-          headerTitle: (props) => <GoBackHeader {...props} navigation={navigation} />,
+          // headerTitle: (props) => <GoBackHeader {...props} navigation={navigation} />,
+          headerShown: false,
           headerStyle: {
             backgroundColor: '#ffffff',
           },
@@ -28,7 +28,11 @@ const AppStack = () => {
           headerTitleStyle: {
             fontWeight: 'bold',
           },
-          headerBackVisible: false
+          headerBackVisible: false,
+          contentStyle: {
+            backgroundColor: '#fff'
+          },
+          cardOverlayEnabled: true,
       })}
     >
       <Stack.Screen

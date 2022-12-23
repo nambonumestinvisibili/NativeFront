@@ -3,7 +3,7 @@ import styled from 'styled-components/native'
 
 const StyledScreenHeader = styled.Text`
   font-size: 32px;
-  font-weight: 900px;
+  font-weight: 800;
   padding: 20px 0;
 `
 
