@@ -9,6 +9,8 @@ import ScreenWrapper from '../../../ui/layout/ScreenWrapper'
 import SiteDescription from './SiteDescription'
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons'; 
 import ExpansionType from '../../../ui/constants/ExpansionTypes'
+import { useSelector } from 'react-redux'
+import { selectCurrentAccent } from '../../../store/reducers/colorsSlice'
 
 const bubblesConfig = [
   {
@@ -142,10 +144,11 @@ const siteData = [
 ]
 
 const DetailedSiteScreen = ({navigation, route}) => {
+  const color = useSelector(selectCurrentAccent)
   return (
     <ScreenWrapper navigation={navigation}>
       <BubbleSlide 
-        color={colors.ACCENTS.PINK}
+        color={color}
         bubbles={bubblesConfig}
         touchable={false}
       />

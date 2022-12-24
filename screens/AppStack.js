@@ -1,11 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { TransitionPresets } from '@react-navigation/stack'
-import colors from '../constants/colors'
 import React from 'react'
 import StackNames from '../constants/stacks'
-import ScreenWrapper from '../ui/layout/ScreenWrapper'
-import GoBackHeader from '../ui/layout/GoBackHeader'
-import BubbleSlide from '../components/BubbleSlide'
 import SplashScreen from './SplashScreen'
 import DetailedSiteScreen from './registered-screens/detailed-site-screen/DetailedSiteScreen'
 import SiteCreationScreen from './registered-screens/site-creation-screen/SiteCreationScreen'
@@ -16,10 +12,8 @@ const AppStack = () => {
 
   return (
     <Stack.Navigator
-      // initialRouteName={StackNames.DetailedSiteScreen}
       screenOptions={({ navigation }) => ({
           ...TransitionPresets.ModalSlideFromBottomIOS,
-          // headerTitle: (props) => <GoBackHeader {...props} navigation={navigation} />,
           headerShown: false,
           headerStyle: {
             backgroundColor: '#ffffff',
@@ -38,9 +32,6 @@ const AppStack = () => {
       <Stack.Screen
         name={StackNames.HomeScreen}
         component={SplashScreen} 
-        options={{
-          headerShown: false,
-        }}
       />
       <Stack.Screen
         name={StackNames.DetailedSiteScreen}

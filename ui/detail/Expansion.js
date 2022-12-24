@@ -1,6 +1,8 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components/native'
 import colors from '../../constants/colors'
+import { selectCurrentAccent } from '../../store/reducers/colorsSlice'
 import ExpansionType from '../constants/ExpansionTypes'
 import BackgroundTile from '../styles/BackgroundTile'
 import Comments from './Comments'
@@ -12,11 +14,11 @@ const StyledRow = styled.View`
 
 const StyledCol = styled.View`
   flex: ${({ flex }) => flex};
-  border-color: ${colors.ACCENTS.PINK};
 
-  ${({ special }) => special && `
-    borderTopWidth: 1px solid ${colors.ACCENTS.PINK};
-    borderBottomWidth: 1px solid ${colors.ACCENTS.PINK};
+  ${({ special, color }) => special && `
+    border-color: ${color};
+    borderTopWidth: 1px;
+    borderBottomWidth: 1px;
   `}
 
   ${({ down }) => down && `
@@ -25,12 +27,13 @@ const StyledCol = styled.View`
 `
 
 const Expansion = ({ expansion }) => {
+  const color = useSelector(selectCurrentAccent)
   return (
     <>
     <StyledRow>
       <StyledCol flex={1}>
       </StyledCol>
-      <StyledCol special down flex={6}>
+      <StyledCol special down color={color} flex={6}>
         <BackgroundTile />
         { expansion.type === ExpansionType.BREAKDOWN && <NumberBreakdown breakdown={expansion.breakdown} /> }
         { expansion.type === ExpansionType.COMMENTS && <Comments comments={expansion.comments}/> }

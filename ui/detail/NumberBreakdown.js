@@ -1,7 +1,8 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components/native'
-import colors from '../../constants/colors'
 import { fontSizes } from '../../constants/style'
+import { selectCurrentAccent } from '../../store/reducers/colorsSlice'
 
 const BreakdownRow = styled.View`
   flex-direction: row;
@@ -12,19 +13,21 @@ const BreakdownRow = styled.View`
 const StyledText = styled.Text`
   font-size: ${fontSizes.big};
 
-  ${({ number }) => number && `
-    color: ${colors.ACCENTS.PINK};
+  ${({ number, color }) => number && `
+    color: ${color};
     min-width: 40px;
   `}
 `
 
 const NumberBreakdown = ({ breakdown }) => {
+  const color = useSelector(selectCurrentAccent)
+  
   return (
     <>
     {breakdown.map(part => (
       <BreakdownRow>
-        <StyledText number>{part.amount}</StyledText>
-        <StyledText>{part.label}</StyledText>
+        <StyledText number color={color}>{part.amount}</StyledText>
+        <StyledText color={color}>{part.label}</StyledText>
       </BreakdownRow>
     ))}
     </>
