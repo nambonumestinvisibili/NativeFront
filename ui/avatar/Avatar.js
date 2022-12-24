@@ -10,7 +10,7 @@ const StyledView = styled.View`
   opacity: ${({ opacity }) => opacity};
 `
 const Avatar = ({
-  opacity=1
+  opacity = 1
 }) => {
   const color = useSelector(selectCurrentAccent)
   return (
