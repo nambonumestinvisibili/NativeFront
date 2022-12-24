@@ -119,10 +119,19 @@ const siteData = [
       type: ExpansionType.COMMENTS,
       comments: [
         {
+          text: "Lorem ipsum dolor."
+        },
+        {
+          text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac efficitur risus. "
+        },
+        {
           text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac efficitur risus. "
         },
         {
           text: "Lorem ipsum dolor."
+        },
+        {
+          text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac efficitur risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac efficitur risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac efficitur risus."
         },
         {
           text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac efficitur risus. "

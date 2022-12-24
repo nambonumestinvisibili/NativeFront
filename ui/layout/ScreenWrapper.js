@@ -3,12 +3,12 @@ import styled from "styled-components/native"
 import GoBackHeader from "./GoBackHeader"
 import ScreenHeader from "./ScreenHeader"
 
-const StyledView = styled.View`
+const StyledView = styled.ScrollView`
   margin: 50px 24px 14px 24px;
 ` 
 const ScreenWrapper = ({ children, navigation }) => {
   return (
-    <StyledView>
+    <StyledView showsVerticalScrollIndicator={false} >
       <GoBackHeader navigation={navigation} />
       <ScreenHeader text={"The Notting Hills"} />
       <View>
