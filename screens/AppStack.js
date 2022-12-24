@@ -3,7 +3,7 @@ import { TransitionPresets } from '@react-navigation/stack'
 import React from 'react'
 import StackNames from '../constants/stacks'
 import SplashScreen from './SplashScreen'
-import DetailedSiteScreen from './registered-screens/detailed-site-screen/DetailedSiteScreen'
+import DetailedVenueScreen from './registered-screens/detailed-venue-screen/DetailedVenueScreen'
 import SiteCreationScreen from './registered-screens/site-creation-screen/SiteCreationScreen'
 
 const Stack = createNativeStackNavigator()
@@ -35,7 +35,7 @@ const AppStack = () => {
       />
       <Stack.Screen
         name={StackNames.DetailedSiteScreen}
-        component={DetailedSiteScreen}
+        component={DetailedVenueScreen}
       /> 
       <Stack.Screen 
         name={StackNames.SiteCreationScreen}

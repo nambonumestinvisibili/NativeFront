@@ -1,16 +1,18 @@
 import React from 'react'
-import { Text } from 'react-native'
+import { useSelector } from 'react-redux'
 import BubbleSlide from '../../../components/BubbleSlide'
 import DetailTable from '../../../components/DetailTable'
 import Divider from '../../../components/Divider'
+import Section from '../../../components/Section'
 import colors from '../../../constants/colors'
 import { iconSizes } from '../../../constants/style'
-import ScreenWrapper from '../../../ui/layout/ScreenWrapper'
-import SiteDescription from './SiteDescription'
-import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons'; 
-import ExpansionType from '../../../ui/constants/ExpansionTypes'
-import { useSelector } from 'react-redux'
 import { selectCurrentAccent } from '../../../store/reducers/colorsSlice'
+import ExpansionType from '../../../ui/constants/ExpansionTypes'
+import UserPromo from '../../../ui/avatar/UserPromo'
+import Question from '../../../ui/question/Question'
+import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons'; 
+import SiteDescription from './SiteDescription'
+import Participants from '../../../ui/participants/Participants'
 
 const bubblesConfig = [
   {
@@ -143,21 +145,30 @@ const siteData = [
   }
 ]
 
-const DetailedSiteScreen = ({navigation, route}) => {
+const EventScreen = () => {
   const color = useSelector(selectCurrentAccent)
   return (
-    <ScreenWrapper navigation={navigation}>
+    <>
       <BubbleSlide 
         color={color}
         bubbles={bubblesConfig}
         touchable={false}
       />
       <Divider />
-      <SiteDescription text={"A nice place to have a dinner with your loved ones"}/>
+      <SiteDescription text={"A xdd place to have a dinner with your loved ones"} />
       <Divider />
-      <DetailTable data={siteData} />
-    </ScreenWrapper>
-    )
+      <UserPromo />
+      <Divider />
+      <Question />
+      <Divider />
+      <Section title={"Details"}>
+        <DetailTable data={siteData}/>
+      </Section>
+      <Section title={"Participants"}>
+        <Participants />
+      </Section>
+    </>
+  )
 }
 
-export default DetailedSiteScreen
+export default EventScreen

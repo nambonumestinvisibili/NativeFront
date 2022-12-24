@@ -1,7 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components/native'
-import colors from '../../constants/colors'
 import { selectCurrentAccent } from '../../store/reducers/colorsSlice'
 import ExpansionType from '../constants/ExpansionTypes'
 import BackgroundTile from '../styles/BackgroundTile'

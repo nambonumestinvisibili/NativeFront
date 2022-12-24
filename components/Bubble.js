@@ -12,11 +12,12 @@ const ButtonContainer = styled.TouchableHighlight`
   align-self: flex-start;
   border-radius: ${borderRadius.basic};
   margin: 0 3px;
+  ${({minWidth}) => minWidth && 'min-width: 60;'}
 `
 
 const StyledText = styled.Text`
   ${InvertedColorsText}
-  align-self: flex-start;
+  align-self: center;
   padding: 5px 15px;
   font-weight: ${fontWeights.medium};
 `
@@ -25,15 +26,17 @@ const Bubble = ({
   isPressed,
   color,
   text,
-  onPress
+  onPress,
+  minWidth
 }) => {
   return (
     text && 
-    <View >
+    <View>
       <ButtonContainer
         onPress={onPress} 
         isPressed={isPressed} 
         color={color}
+        minWidth={minWidth}
         style={shadowStyle}
       >    
         <StyledText 
