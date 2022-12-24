@@ -4,7 +4,7 @@ import GoBackHeader from "./GoBackHeader"
 import ScreenHeader from "./ScreenHeader"
 
 const StyledView = styled.ScrollView`
-  margin: 50px 24px 14px 24px;
+  padding: 50px 24px 14px 24px;
 ` 
 const ScreenWrapper = ({ children, navigation }) => {
   return (

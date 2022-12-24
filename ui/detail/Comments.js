@@ -5,13 +5,14 @@ import colors from '../../constants/colors'
 import { borderRadius } from '../../constants/style'
 
 const StyledView = styled.ScrollView`
-  maxHeight: 200px;
+  max-height: 200px;
 `
 
 const Comment = styled.View`
-  borderColor: ${colors.ACCENTS.PINK};
-  borderWidth: 1px;
-  borderRadius: ${borderRadius.basic};
+  border-color: ${colors.ACCENTS.PINK};
+  border-width: 1px;
+  border-radius: ${borderRadius.basic};
+  background-color: ${colors.BASIC.WHITE};
   margin: 5px 0;
   padding: 10px 14px;
 `

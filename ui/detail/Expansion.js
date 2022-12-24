@@ -2,17 +2,17 @@ import React from 'react'
 import styled from 'styled-components/native'
 import colors from '../../constants/colors'
 import ExpansionType from '../constants/ExpansionTypes'
+import BackgroundTile from '../styles/BackgroundTile'
 import Comments from './Comments'
 import NumberBreakdown from './NumberBreakdown'
 
 const StyledRow = styled.View`
-  flexDirection: row;
-  // background-color: ${colors.ACCENTS.PINK};
+  flex-direction: row;
 `
 
 const StyledCol = styled.View`
   flex: ${({ flex }) => flex};
-  borderColor: ${colors.ACCENTS.PINK};
+  border-color: ${colors.ACCENTS.PINK};
 
   ${({ special }) => special && `
     borderTopWidth: 1px solid ${colors.ACCENTS.PINK};
@@ -26,14 +26,17 @@ const StyledCol = styled.View`
 
 const Expansion = ({ expansion }) => {
   return (
+    <>
     <StyledRow>
       <StyledCol flex={1}>
       </StyledCol>
       <StyledCol special down flex={6}>
+        <BackgroundTile />
         { expansion.type === ExpansionType.BREAKDOWN && <NumberBreakdown breakdown={expansion.breakdown} /> }
         { expansion.type === ExpansionType.COMMENTS && <Comments comments={expansion.comments}/> }
       </StyledCol>
     </StyledRow>
+    </>
   )
 }
 
