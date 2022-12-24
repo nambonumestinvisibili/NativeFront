@@ -5,6 +5,7 @@ import StackNames from '../constants/stacks'
 import SplashScreen from './SplashScreen'
 import DetailedVenueScreen from './registered-screens/detailed-venue-screen/DetailedVenueScreen'
 import SiteCreationScreen from './registered-screens/site-creation-screen/SiteCreationScreen'
+import VenueMapScreen from './registered-screens/venue-map-screen/VenueMapScreen'
 
 const Stack = createNativeStackNavigator()
 
@@ -32,6 +33,10 @@ const AppStack = () => {
       <Stack.Screen
         name={StackNames.HomeScreen}
         component={SplashScreen} 
+      />
+      <Stack.Screen 
+        name={StackNames.VenueMapScreen}
+        component={VenueMapScreen}
       />
       <Stack.Screen
         name={StackNames.DetailedSiteScreen}

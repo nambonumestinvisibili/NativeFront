@@ -1,5 +1,6 @@
 const StackNames = {
   HomeScreen: "HomeScreen",
+  VenueMapScreen: "VenueMapScreen",
   DetailedSiteScreen: "DetailedSiteScreen",
   SiteCreationScreen: "SiteCreationScreen"
 }

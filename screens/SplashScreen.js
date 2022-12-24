@@ -18,6 +18,14 @@ const SplashScreen = ({navigation}) => {
     <>
       <StText>Native</StText>
       <Bubble 
+        text={'Go to map screen'} 
+        isPressed 
+        color={colors.ACCENTS.PINK}
+        onPress={() => {
+          dispatch(changeCurrentAccent(colors.ACCENTS.PINK))
+          navigation.push(StackNames.VenueMapScreen)}}
+      />
+      <Bubble 
         text={'Go to detailed screen'} 
         isPressed 
         color={colors.ACCENTS.PINK}
