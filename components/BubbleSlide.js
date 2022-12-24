@@ -7,12 +7,13 @@ const StyledScrollView = styled.ScrollView`
   position: absolute;
   left: -20;
   right: -20;
+  height: 40;
 `
 
 const BubbleSlide = ({ bubbles, touchable, color }) => {
   return (
     <View style={{
-      minHeight: 30,
+      minHeight: 40,
     }}>
       <StyledScrollView horizontal showsHorizontalScrollIndicator={false}>
         {bubbles.map(bubble => (

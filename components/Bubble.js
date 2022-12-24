@@ -1,8 +1,9 @@
 import React from 'react'
+import { View } from 'react-native'
 import styled from 'styled-components/native'
-import colors from '../constants/colors'
-import { borderRadius, fontWeights, shadows } from '../constants/style'
+import { borderRadius, fontWeights } from '../constants/style'
 import { InvertedColorsBackground, InvertedColorsText } from '../ui/styles/InvertedColors'
+import shadowStyle from '../ui/styles/ShadowStyle'
 
 const ButtonContainer = styled.TouchableHighlight`
   ${InvertedColorsBackground};
@@ -14,10 +15,10 @@ const ButtonContainer = styled.TouchableHighlight`
 `
 
 const StyledText = styled.Text`
-    ${InvertedColorsText}
-    align-self: flex-start;
-    padding: 5px 15px;
-    font-weight: ${fontWeights.medium};
+  ${InvertedColorsText}
+  align-self: flex-start;
+  padding: 5px 15px;
+  font-weight: ${fontWeights.medium};
 `
 
 const Bubble = ({ 
@@ -27,18 +28,22 @@ const Bubble = ({
   onPress
 }) => {
   return (
-    text && <ButtonContainer
-      onPress={onPress} 
-      isPressed={isPressed} 
-      color={color}
-    >    
-      <StyledText 
+    text && 
+    <View >
+      <ButtonContainer
+        onPress={onPress} 
         isPressed={isPressed} 
         color={color}
-      >
-        {text}
-      </StyledText>
-    </ButtonContainer>
+        style={shadowStyle}
+      >    
+        <StyledText 
+          isPressed={isPressed} 
+          color={color}
+        >
+          {text}
+        </StyledText>
+      </ButtonContainer>
+    </View>
   )
 }
 

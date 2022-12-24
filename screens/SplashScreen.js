@@ -5,7 +5,7 @@ import AddButton from '../components/AddButton'
 import Bubble from '../components/Bubble'
 import colors from '../constants/colors'
 import StackNames from '../constants/stacks'
-import colorsSlice, { changeCurrentAccent } from '../store/reducers/colorsSlice'
+import { changeCurrentAccent } from '../store/reducers/colorsSlice'
 
 const StText = styled.Text`
   margin-top: 150px;
