@@ -1,17 +1,22 @@
 import React from 'react'
 import styled from 'styled-components/native'
+import Divider from '../../components/Divider'
+import { fontSizes } from '../../constants/style'
 
 const StyledScreenHeader = styled.Text`
-  font-size: 32px;
+  font-size: ${fontSizes.biggest};
   font-weight: 800;
-  padding: 20px 0;
+  padding-top: 20px;
 `
 
 const ScreenHeader = ({ text }) => {
   return (
-    <StyledScreenHeader>
-      {text}
-    </StyledScreenHeader>
+    <>
+      <StyledScreenHeader>
+        {text}
+      </StyledScreenHeader>
+      <Divider />
+    </>
   )
 }
 

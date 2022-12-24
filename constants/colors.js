@@ -7,7 +7,8 @@ const colors = {
     BURGUND: '#9A275A'
   },
   BASIC: {
-    WHITE: '#FFFFFF'
+    WHITE: '#FFFFFF',
+    BLACK: '#212427'
   }
 }
 
