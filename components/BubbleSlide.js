@@ -16,8 +16,9 @@ const BubbleSlide = ({ bubbles, touchable, color }) => {
       minHeight: 40,
     }}>
       <StyledScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {bubbles.map(bubble => (
+        {bubbles.map((bubble, idx) => (
           <Bubble
+            key={idx}
             color={color}
             isPressed
             text={bubble.text} 
