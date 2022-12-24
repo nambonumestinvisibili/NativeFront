@@ -1,12 +1,13 @@
 import React, { useEffect, useReducer, useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import MapView, { Marker } from 'react-native-maps'
+import MapView, { Marker, Callout } from 'react-native-maps'
 import * as Location from 'expo-location'
 import VenueMarker from '../../../components/VenueMarker'
 import colors from '../../../constants/colors'
 import BubbleSlide from '../../../components/BubbleSlide'
+import StackNames from '../../../constants/stacks'
 
-const VenueMapScreen = () => {
+const VenueMapScreen = ({ navigation }) => {
   const [initialRegion, dispatchInitialRegion] = useReducer(
     (state, action) => {
       const newLocation = action.payload
@@ -98,6 +99,10 @@ const VenueMapScreen = () => {
       }})
     })()
   }, [])
+
+  const navigateToDetails = () => {
+    navigation.push(StackNames.DetailedSiteScreen)
+  }
   
   return (
     <View>
@@ -112,6 +117,7 @@ const VenueMapScreen = () => {
             coordinate={marker.latlng}
             title={marker.title}
             description={marker.description}
+            // onPress={navigateToDetails}
           >
             <VenueMarker color={marker.color} />
           </Marker>

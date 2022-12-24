@@ -8,6 +8,7 @@ const StyledView = styled.ScrollView`
 ` 
 const ScreenWrapper = ({ children, navigation }) => {
   return (
+    <View>
     <StyledView showsVerticalScrollIndicator={false} >
       <GoBackHeader navigation={navigation} />
       <ScreenHeader text={"The Notting Hills"} />
@@ -15,6 +16,7 @@ const ScreenWrapper = ({ children, navigation }) => {
         { children }
       </View>
     </StyledView>
+    </View>
   )
 }
 
