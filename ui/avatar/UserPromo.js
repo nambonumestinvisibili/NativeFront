@@ -1,36 +1,21 @@
 import React from 'react'
 import styled from 'styled-components/native'
 import Avatar from './Avatar'
+import UserBasicInfo from './UserBasicInfo'
 
 const StyledView = styled.View`
-  flex-direction: row;
+  flex-direction: ${({horizontal}) => horizontal ? 'row' : 'column'};
 `
 
-const UserPromoView = styled.View`
-  justify-content: flex-end;
-  padding-left: 10;
-`
-
-const Name = styled.Text`
-  font-size: 20px;
-  font-weight: 500;
-`
-
-const Bio = styled.Text`
-`
-
-const UserPromo = () => {
+const UserPromo = ({ horizontal, name, bio }) => {
   return (
-    <StyledView>
+    <StyledView horizontal={horizontal}>
       <Avatar />
-      <UserPromoView>
-        <Name>
-          Patricia
-        </Name>
-        <Bio>
-          Friendly neighbourhood waitress
-        </Bio>
-      </UserPromoView>
+      <UserBasicInfo
+        bio={bio} 
+        name={name} 
+        horizontal={horizontal} 
+      />
     </StyledView>
   )
 }

@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Text, View } from 'react-native'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { selectCurrentAccent } from '../store/reducers/colorsSlice'
@@ -19,16 +18,16 @@ const ViewContainer = styled.View`
   margin-bottom: 20px;
 `
 
-const Section = ({ title, children }) => {
+const Section = ({ title, children, expanded }) => {
 
-  const [showExpansion, setShowExpansion] = useState(true)
+  const [showExpansion, setShowExpansion] = useState(expanded)
   const color = useSelector(selectCurrentAccent)
 
   return (
     <>
       <ViewContainer color={color} >
         <SectionText>{title}</SectionText>
-        <Arrow onPress={() => {
+        <Arrow initialUp={!expanded} onPress={() => {
           setShowExpansion(!showExpansion)
         }} />
       </ViewContainer>

@@ -157,14 +157,14 @@ const EventScreen = () => {
       <Divider />
       <SiteDescription text={"A xdd place to have a dinner with your loved ones"} />
       <Divider />
-      <UserPromo />
+      <UserPromo horizontal name="Patricia" bio="Friendly neighbourhood waitress" />
       <Divider />
       <Question />
       <Divider />
-      <Section title={"Details"}>
+      <Section title={"Details"} >
         <DetailTable data={siteData}/>
       </Section>
-      <Section title={"Participants"}>
+      <Section title={"Participants"} expanded>
         <Participants />
       </Section>
     </>
