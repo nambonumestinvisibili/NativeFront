@@ -16,7 +16,7 @@ export const colorsSlice = createSlice({
 
 export const { changeCurrentAccent } = colorsSlice.actions
 
-export const getRoot = state => state.colors
+const getRoot = state => state.colors
 export const selectCurrentAccent = state => getRoot(state).currentAccent
 
 export default colorsSlice.reducer

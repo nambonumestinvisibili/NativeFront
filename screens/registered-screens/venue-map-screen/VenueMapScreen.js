@@ -1,34 +1,21 @@
 import React, { useEffect, useReducer, useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import MapView, { Marker, Callout } from 'react-native-maps'
-import * as Location from 'expo-location'
 import VenueMarker from '../../../components/VenueMarker'
 import colors from '../../../constants/colors'
 import BubbleSlide from '../../../components/BubbleSlide'
 import StackNames from '../../../constants/stacks'
+import useLocation from '../../../logic/useLocation'
 
 const VenueMapScreen = ({ navigation }) => {
-  const [initialRegion, dispatchInitialRegion] = useReducer(
-    (state, action) => {
-      const newLocation = action.payload
-      return ({
-        ...state,
-        latitude: newLocation.latitude,
-        longitude: newLocation.longitude,
-      })
-    },
-    {
-      latitude: 37.78825,
-      longitude: -122.4324,
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0321,
-    })
+
+  const { region } = useLocation()
 
   const markers = [
     {
       latlng: {
-        latitude: initialRegion.latitude + 0.00030,
-        longitude: initialRegion.longitude + 0.00030
+        latitude: region.latitude + 0.00030,
+        longitude: region.longitude + 0.00030
       },
       description: "stuff...",
       color: colors.ACCENTS.PINK
@@ -36,16 +23,16 @@ const VenueMapScreen = ({ navigation }) => {
     },
     {
       latlng: {
-        latitude: initialRegion.latitude - 0.0030,
-        longitude: initialRegion.longitude - 6 *  0.0030
+        latitude: region.latitude - 0.0030,
+        longitude: region.longitude - 6 *  0.0030
       },
       description: "stuff...",
       color: colors.ACCENTS.BURGUND
     },
     {
       latlng: {
-        latitude: initialRegion.latitude + 5 * 0.0030,
-        longitude: initialRegion.longitude - 2 * 0.0030
+        latitude: region.latitude + 5 * 0.0030,
+        longitude: region.longitude - 2 * 0.0030
       },
       description: "stuff...",
       color: colors.ACCENTS.MUSTARD
@@ -53,8 +40,8 @@ const VenueMapScreen = ({ navigation }) => {
     },
     {
       latlng: {
-        latitude: initialRegion.latitude + 2* 0.0030,
-        longitude: initialRegion.longitude + 2* 0.0030
+        latitude: region.latitude + 2* 0.0030,
+        longitude: region.longitude + 2* 0.0030
       },
       description: "stuff...",
       color: colors.ACCENTS.MINT
@@ -83,23 +70,6 @@ const VenueMapScreen = ({ navigation }) => {
     }
   ]
 
-  useEffect(() => {
-    (async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync()
-
-      if (status !== 'granted') {
-        setLoc('Permission to access location was denied');
-        return;
-      }
-
-      let location = await Location.getCurrentPositionAsync({})
-      dispatchInitialRegion({ payload: { 
-        longitude: location.coords.longitude,
-        latitude: location.coords.latitude
-      }})
-    })()
-  }, [])
-
   const navigateToDetails = () => {
     navigation.push(StackNames.DetailedSiteScreen)
   }
@@ -107,8 +77,8 @@ const VenueMapScreen = ({ navigation }) => {
   return (
     <View>
       <MapView 
-        region={initialRegion}
-        initialRegion={initialRegion}
+        region={region}
+        initialRegion={region} //todo: change to last user's location
         style={mapStyles}
       >
         {markers.map((marker, index) => (
