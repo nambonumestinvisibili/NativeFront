@@ -1,8 +1,8 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { TransitionPresets } from '@react-navigation/stack'
 import React from 'react'
 import StackNames from '../constants/stacks'
-import SplashScreen from './HomeScreen'
+import { STACK_STYLES } from '../utils/stack_config'
+import HomeScreen from './HomeScreen'
 import DetailedVenueScreen from './registered-screens/detailed-venue-screen/DetailedVenueScreen'
 import SiteCreationScreen from './registered-screens/site-creation-screen/SiteCreationScreen'
 import VenueMapScreen from './registered-screens/venue-map-screen/VenueMapScreen'
@@ -13,26 +13,11 @@ const AppStack = () => {
 
   return (
     <Stack.Navigator
-      screenOptions={({ navigation }) => ({
-          ...TransitionPresets.ModalSlideFromBottomIOS,
-          headerShown: false,
-          headerStyle: {
-            backgroundColor: '#ffffff',
-          },
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
-          headerBackVisible: false,
-          contentStyle: {
-            backgroundColor: '#fff'
-          },
-          cardOverlayEnabled: true,
-      })}
+      screenOptions={({ navigation }) => (STACK_STYLES)}
     >
       <Stack.Screen
         name={StackNames.HomeScreen}
-        component={SplashScreen} 
+        component={HomeScreen} 
       />
       <Stack.Screen 
         name={StackNames.VenueMapScreen}

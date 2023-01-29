@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components/native'
 import AddButton from '../components/AddButton'
@@ -12,7 +12,7 @@ const StText = styled.Text`
   font-size: 90px;
 `
 
-const SplashScreen = ({navigation}) => {
+const HomeScreen = ({navigation}) => {
   const dispatch = useDispatch()
   return (
     <>
@@ -59,4 +59,4 @@ const SplashScreen = ({navigation}) => {
   )
 }
 
-export default SplashScreen
+export default HomeScreen
