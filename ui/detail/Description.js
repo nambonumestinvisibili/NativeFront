@@ -17,8 +17,8 @@ const Description = ({ textBreakdown }) => {
   const color = useSelector(selectCurrentAccent)
   return (
     <StyledView>
-      {textBreakdown.map(text => (
-        <StyledText color={text.colored && color}>{`${text.text} `}</StyledText>
+      {textBreakdown.map((text, idx) => (
+        <StyledText key={idx} color={text.colored && color}>{`${text.text} `}</StyledText>
       ))}
     </StyledView>
   )

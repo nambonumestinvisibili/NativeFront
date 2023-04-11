@@ -23,8 +23,8 @@ const Comments = ({ comments }) => {
   const color = useSelector(selectCurrentAccent)
   return (
     <StyledView>
-      {comments.map(comment => (
-        <Comment color={color}>
+      {comments.map((comment, idx) => (
+        <Comment key={idx} color={color}>
           <Text>
             {comment.text}
           </Text>

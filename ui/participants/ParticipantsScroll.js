@@ -43,8 +43,8 @@ const ParticipantsScroll = ({
 }) => {
   return (
     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-      {participants.map(participant => (
-        <Avatar name={participant.name} opacity={0.5} />
+      {participants.map((participant, idx) => (
+        <Avatar key={idx} name={participant.name} opacity={0.5} />
       ))}
     </ScrollView>
   )

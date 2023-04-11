@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {  } from "react-redux";
 import colorsReducer from './reducers/colorsSlice'
+import spinnerReducer from './reducers/spinnerSlice'
 
 const store = configureStore({
   reducer: {
-    colors: colorsReducer
+    colors: colorsReducer,
+    spinner: spinnerReducer
   }
 })
 

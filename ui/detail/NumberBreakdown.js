@@ -24,8 +24,8 @@ const NumberBreakdown = ({ breakdown }) => {
   
   return (
     <>
-    {breakdown.map(part => (
-      <BreakdownRow>
+    {breakdown.map((part, idx) => (
+      <BreakdownRow key={idx}>
         <StyledText number color={color}>{part.amount}</StyledText>
         <StyledText color={color}>{part.label}</StyledText>
       </BreakdownRow>

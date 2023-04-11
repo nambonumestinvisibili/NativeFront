@@ -5,8 +5,8 @@ import Detail from './Detail'
 const DetailTable = ({ data }) => {
   return (
     <View>
-      { data.map(row => (
-        <Detail {...row} />
+      { data.map((row, idx) => (
+        <Detail key={idx} {...row} />
       )) }  
     </View>
   )

@@ -5,7 +5,7 @@ import { selectCurrentAccent } from '../store/reducers/colorsSlice'
 import Arrow from '../ui/icons/Arrow'
 
 const SectionText = styled.Text`
-  letter-spacing: 1.1em;
+  letter-spacing: 1.1;
   text-transform: uppercase;
 `
 

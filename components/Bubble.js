@@ -12,7 +12,7 @@ const ButtonContainer = styled.TouchableHighlight`
   align-self: flex-start;
   border-radius: ${borderRadius.basic};
   margin: 0 3px;
-  ${({minWidth}) => minWidth && 'min-width: 60;'}
+  ${({minWidth}) => minWidth && 'min-width: 60px;'}
 `
 
 const StyledText = styled.Text`
