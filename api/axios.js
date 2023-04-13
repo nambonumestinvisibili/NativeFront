@@ -21,13 +21,12 @@ const processResponse = (resp, setStateCallback, method) => {
 
   const contentType = resp.headers.get("Content-Type") 
 
+  const reactToOutput = responseBody =>
+    onResponseStatus(responseStatus, setStateCallback, responseBody)
+  
   contentType === "application/json" 
-    ? resp.json().then(responseBody => {
-      onResponseStatus(responseStatus, setStateCallback, responseBody)
-    })
-    : resp.text().then(responseBody => {
-      onResponseStatus(responseStatus, setStateCallback, responseBody)
-    })
+    ? resp.json().then(reactToOutput)
+    : resp.text().then(reactToOutput)
 }
 
 export const useHttp = () => {

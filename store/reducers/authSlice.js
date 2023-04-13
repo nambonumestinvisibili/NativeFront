@@ -18,4 +18,4 @@ export const { updateJWT } = authSlice.actions
 const getRoot = state => state.auth
 export const selectJWT = state => getRoot(state).jwt
 
-export default colorsSlice.reducer
+export default authSlice.reducer
