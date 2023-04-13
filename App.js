@@ -7,7 +7,7 @@ import store from './store/store'
 import * as SplashScreen from 'expo-splash-screen';
 import useSplashScreen from './logic/useSplashScreen'
 import UnregisteredStack from './screens/not-registered-screens/UnregisteredStack'
-import { AppState } from 'react-native'
+import { DEV_UNREGISTERED } from './config/devconfiguration'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -25,7 +25,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer onReady={onLayoutRootView}>
-        {false 
+        {DEV_UNREGISTERED 
         ? <UnregisteredStack />
         : <AppStack />}
       </NavigationContainer>

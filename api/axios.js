@@ -1,51 +1,69 @@
-import axios from 'axios'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { showSpinner, hideSpinner } from '../store/reducers/spinnerSlice'
-import Constants from 'expo-constants'
+import { showSpinner, hideSpinner } from '../store/reducers/spinnerSlice';
 
-const { manifest } = Constants
-const HOST = (false && typeof manifest.packagerOpts === 'object' && manifest.packagerOpts.dev)
-  ? "http://" + manifest.debuggerHost.split(':').shift().concat(":7040") + '/'
-  : "http://10.0.2.2:7040/"
-const NATIVE_PATH = "api/"
-const BASE_URL = `${HOST}${NATIVE_PATH}`
+const createLog = (urlWithParams, body) => `
+attempting to make a http call: -
+url - ${urlWithParams}
+body - ${JSON.stringify(body)}
+` 
 
-axios({
+const onResponseStatus = (responseStatus, setStateCallback, responseBody) => {
+  responseStatus === 200 
+        ? setStateCallback(responseBody)
+        : console.log(responseBody.errors)
+}
 
-})
+const processResponse = (resp, setStateCallback, method) => {
+  const responseStatus = resp.status
+  const responseUrl = resp.url
+  console.log(`${(method, responseUrl)} responsed with status ${responseStatus}`)
 
-axios.defaults.baseURL = BASE_URL;
+  const contentType = resp.headers.get("Content-Type") 
+
+  contentType === "application/json" 
+    ? resp.json().then(responseBody => {
+      onResponseStatus(responseStatus, setStateCallback, responseBody)
+    })
+    : resp.text().then(responseBody => {
+      onResponseStatus(responseStatus, setStateCallback, responseBody)
+    })
+}
 
 export const useHttp = () => {
     const dispatch = useDispatch()
 
-    const [response, setResponse] = useState(null);
     const [error, setError] = useState('');
     const [loading, setloading] = useState(true);
 
     const fetchData = (
       url, 
       method, 
-      queryParams = [], 
-      body = {}, 
-      headers = {}
+      setStateCallback,
+      queryParams, 
+      body, 
     ) => {
         dispatch(showSpinner())
-        
+
         const urlWithParams = queryParams 
           ? `${url}?${queryParams.map(pair => 
               `${Object.keys(pair)[0]}=${Object.values(pair)[0]}`).join("&")}`
           : url
-        // debugger
-        console.log(url)
-        axios[method](urlWithParams, headers, body)
-            .then((res) => {
-                setResponse(res.data);
-                console.log(`${method, url} repsonsed with status ${res.status} and data ${JSON.stringify(res.data)}`)
-            })
-            .catch((err) => {
-                console.log(`axios error: - ${err} ${err.status, err.code, err.response}`)
+        
+        console.log(createLog(urlWithParams, body))
+
+        const fetchConfiguration = {
+          method,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(body)
+        }
+
+        fetch(urlWithParams, fetchConfiguration)
+            .then(resp => processResponse(resp, setStateCallback, method))
+            .catch(err => {
+                console.log(`fetch error: -  ${err}`)
                 setError(err);
             })
             .finally(() => {
@@ -53,49 +71,22 @@ export const useHttp = () => {
             });
     };
 
-    const get = ( 
+    const makeHttpCall = method => ( 
       url,
-      {queryParams, 
-      body, 
-      headers 
-      } = {}) => fetchData(url, "get", queryParams, body, headers)
-
-    const post = (
-      url, 
-      { 
+      setStateCallback,
+      {
         queryParams, 
         body, 
-        headers 
-      } = {}) => fetchData(url, "post", queryParams, body, headers)
+      } = {}) => fetchData(url, method, setStateCallback, queryParams, body)
 
-    const del = ( 
-      url, {
-        queryParams, 
-        body, 
-        headers 
-      } = {}) => fetchData(url, "delete", queryParams, body, headers)
-
-    const put = ( 
-      url, {
-        queryParams, 
-        body, 
-        headers 
-      } = {}) => fetchData(url, "put", queryParams, body, headers)
-
-    const patch = (
-      url, {
-      queryParams, 
-      body, 
-      headers 
-    } = {}) => fetchData(url, "patch", queryParams, body, headers)
+    const get = makeHttpCall("get")
+    const post = makeHttpCall("post")
+    const del = makeHttpCall("delete")
+    const put = makeHttpCall("put")
+    const patch = makeHttpCall("patch")
 
     return {
       get, post, put, patch, del
     }
 };
 
-export const URLS = {
-  interestApi: {
-    getAll: `${BASE_URL}Interest`
-  }
-}

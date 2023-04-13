@@ -3,11 +3,7 @@ import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { selectCurrentAccent } from '../store/reducers/colorsSlice'
 import Arrow from '../ui/icons/Arrow'
-
-const SectionText = styled.Text`
-  letter-spacing: 1.1;
-  text-transform: uppercase;
-`
+import Capitals from '../ui/typography/Capitals'
 
 const ViewContainer = styled.View`
   border-bottom-width: 1px;
@@ -26,7 +22,7 @@ const Section = ({ title, children, expanded }) => {
   return (
     <>
       <ViewContainer color={color} >
-        <SectionText>{title}</SectionText>
+        <Capitals>{title}</Capitals>
         <Arrow initialUp={!expanded} onPress={() => {
           setShowExpansion(!showExpansion)
         }} />
