@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectJWT } from '../store/reducers/authSlice';
 import { showSpinner, hideSpinner } from '../store/reducers/spinnerSlice';
 
 const createLog = (urlWithParams, body) => `
@@ -31,7 +32,8 @@ const processResponse = (resp, setStateCallback, method) => {
 
 export const useHttp = () => {
     const dispatch = useDispatch()
-
+    const JWTToken = useSelector(selectJWT)
+    
     const [error, setError] = useState('');
     const [loading, setloading] = useState(true);
 
@@ -55,6 +57,7 @@ export const useHttp = () => {
           method,
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${JWTToken}`
           },
           body: JSON.stringify(body)
         }

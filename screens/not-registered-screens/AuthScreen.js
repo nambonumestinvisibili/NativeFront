@@ -5,6 +5,7 @@ import SubmitButton from '../../ui/input/SubmitButton';
 import useApi from '../../api/api';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectJWT, updateJWT } from '../../store/reducers/authSlice';
+import { Text } from 'react-native';
 
 const AuthScreen = () => {
   
@@ -23,11 +24,19 @@ const AuthScreen = () => {
     })
   }
 
+  const postXD = () => {
+    api.interestApi.postAllBody(setEmail, "as", "data")
+  }
+
   return (
     <ScreenWrapper>
       <Input labelText={"What's your email?"} onChangeText={(email) => setEmail(email)} />
       <Input labelText={"Password?"} onChangeText={(password) => setPassword(password)}/>
       <SubmitButton onPress={submitLogin}/>
+      <Text>XX</Text>
+      <Text>XX</Text>
+      <SubmitButton onPress={postXD} />
+      <Text>{JSON.stringify(email)}</Text>
     </ScreenWrapper>
   )
 }
