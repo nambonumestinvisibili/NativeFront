@@ -1,5 +1,4 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import React from 'react'
 import StackNames from '../constants/stacks'
 import { STACK_STYLES } from '../utils/stack_config'
 import HomeScreen from './HomeScreen'
@@ -7,32 +6,32 @@ import DetailedVenueScreen from './registered-screens/detailed-venue-screen/Deta
 import SiteCreationScreen from './registered-screens/site-creation-screen/SiteCreationScreen'
 import VenueMapScreen from './registered-screens/venue-map-screen/VenueMapScreen'
 
-const Stack = createNativeStackNavigator()
+const RegisteredStackNavigator = createNativeStackNavigator()
 
-const AppStack = () => {
+const RegisteredStack = () => {
 
   return (
-    <Stack.Navigator
+    <RegisteredStackNavigator.Navigator
       screenOptions={({ navigation }) => (STACK_STYLES)}
     >
-      <Stack.Screen
+      <RegisteredStackNavigator.Screen
         name={StackNames.HomeScreen}
         component={HomeScreen} 
       />
-      <Stack.Screen 
+      <RegisteredStackNavigator.Screen 
         name={StackNames.VenueMapScreen}
         component={VenueMapScreen}
       />
-      <Stack.Screen
+      <RegisteredStackNavigator.Screen
         name={StackNames.DetailedSiteScreen}
         component={DetailedVenueScreen}
       /> 
-      <Stack.Screen 
+      <RegisteredStackNavigator.Screen 
         name={StackNames.SiteCreationScreen}
         component={SiteCreationScreen}
       />
-    </Stack.Navigator>
+    </RegisteredStackNavigator.Navigator>
   )
 }
 
-export default AppStack
+export default RegisteredStack

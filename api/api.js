@@ -5,6 +5,10 @@ const HOST = DEV_DOMAIN
 const NATIVE_PATH = "api/"
 const BASE_URL = `${HOST}${NATIVE_PATH}`
 
+const PathPrefixes = {
+  Authentication: 'Authentication'
+}
+
 const surroundWithRoot = urlPath => `${BASE_URL}${urlPath}`
 
 const httpCall = (methodCall, url, setStateCallback, body) => 
@@ -21,9 +25,20 @@ const useApi = () => {
     },
     authApi: {
       login: (setStateCallback, { email, password }) => 
-        httpCall(post, 'Authentication/login', setStateCallback, {
+        httpCall(post, `${PathPrefixes.Authentication}/login`, setStateCallback, {
            email, password
-          }) 
+          }),
+      signUp: (setStateCallback, { 
+        email, 
+        password,
+        userName,
+        givenName,
+        familyName 
+      }) =>
+        httpCall(post, `${PathPrefixes.Authentication}/signUp`, setStateCallback, {
+          email, password, userName, givenName, familyName
+        })
+      
     }
   }
 

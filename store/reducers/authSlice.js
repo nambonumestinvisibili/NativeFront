@@ -9,11 +9,14 @@ export const authSlice = createSlice({
   reducers: {
     updateJWT: (state, action) => {
       state.jwt = action.payload
+    },
+    removeJWT: (state) => {
+      state.jwt = null
     }
   } 
 })
 
-export const { updateJWT } = authSlice.actions
+export const { updateJWT, removeJWT } = authSlice.actions
 
 const getRoot = state => state.auth
 export const selectJWT = state => getRoot(state).jwt

@@ -1,9 +1,10 @@
-const StackNames = {
+const StackNames = { 
   HomeScreen: "HomeScreen",
   VenueMapScreen: "VenueMapScreen",
   DetailedSiteScreen: "DetailedSiteScreen",
   SiteCreationScreen: "SiteCreationScreen",
-  AuthScreen: "AuthScreen"
+  AuthScreen: "AuthScreen",
+  SignupScreen: "SignupScreen"
 }
 
 export default StackNames

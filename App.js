@@ -1,18 +1,16 @@
 import 'react-native-gesture-handler'
-import React from 'react'
-import AppStack from './screens/AppStack'
 import { NavigationContainer } from '@react-navigation/native'
 import { Provider } from 'react-redux'
 import store from './store/store'
-import * as SplashScreen from 'expo-splash-screen';
+import * as SplashScreen from 'expo-splash-screen'
 import useSplashScreen from './logic/useSplashScreen'
-import UnregisteredStack from './screens/not-registered-screens/UnregisteredStack'
-import { DEV_UNREGISTERED } from './config/devconfiguration'
+import { Logs } from 'expo'
+import NavigatedApp from './screens/NavigatedApp'
 
 SplashScreen.preventAutoHideAsync()
+Logs.enableExpoCliLogging()
 
 export default function App() {
-  // console.log(AppState.currentState)
   const {
     appIsReady,
     onLayoutRootView
@@ -25,9 +23,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer onReady={onLayoutRootView}>
-        {DEV_UNREGISTERED 
-        ? <UnregisteredStack />
-        : <AppStack />}
+        <NavigatedApp />
       </NavigationContainer>
     </Provider>
   )

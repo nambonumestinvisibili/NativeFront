@@ -12,7 +12,7 @@ body - ${JSON.stringify(body)}
 const onResponseStatus = (responseStatus, setStateCallback, responseBody) => {
   responseStatus === 200 
         ? setStateCallback(responseBody)
-        : console.log(responseBody.errors)
+        : console.log(responseBody)
 }
 
 const processResponse = (resp, setStateCallback, method) => {

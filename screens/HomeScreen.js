@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components/native'
 import AddButton from '../components/AddButton'
@@ -6,6 +5,7 @@ import Bubble from '../components/Bubble'
 import colors from '../constants/colors'
 import StackNames from '../constants/stacks'
 import { changeCurrentAccent } from '../store/reducers/colorsSlice'
+import LogoutButton from '../ui/input/buttons/LogoutButton'
 
 const StText = styled.Text`
   margin-top: 150px;
@@ -55,6 +55,7 @@ const HomeScreen = ({navigation}) => {
         color={colors.ACCENTS.MINT}
         onPress={() => navigation.push(StackNames.SiteCreationScreen)}
       />
+      <LogoutButton />
     </>
   )
 }

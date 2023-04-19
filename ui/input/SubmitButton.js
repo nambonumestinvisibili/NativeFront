@@ -1,9 +1,8 @@
-import React from 'react'
-import Bubble from '../../components/Bubble'
+import Button from './Button'
 
 const SubmitButton = ({ onPress }) => {
   return (
-    <Bubble text={"Let's go"} onPress={onPress}>SubmitButton</Bubble>
+    <Button text={"Let's go"} onPress={onPress}></Button>
   )
 }
 
