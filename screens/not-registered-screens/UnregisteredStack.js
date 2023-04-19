@@ -1,8 +1,11 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { STACK_STYLES } from '../../utils/stack_config';
-import AuthScreen from './AuthScreen';
+import LoginScreen from './LoginScreen';
 import StackNames from '../../constants/stacks';
 import SignupScreen from './SignupScreen';
+import BasicDescriptionScreen from './signup-screens/BasicDescriptionScreen';
+import InterestScreen from './signup-screens/InterestScreen';
+import BasicInfoScreen from './signup-screens/BasicInfoScreen';
 
 
 const Stack = createNativeStackNavigator()
@@ -15,12 +18,28 @@ const UnregisteredStack = () => {
     >
       <Stack.Screen
         name={StackNames.AuthScreen}
-        component={AuthScreen} 
+        component={LoginScreen} 
       />
       <Stack.Screen 
         name={StackNames.SignupScreen}
         component={SignupScreen}
       />
+      <Stack.Screen 
+        name={StackNames.BasicIntoScreen}
+        component={BasicInfoScreen}
+      />
+      <Stack.Screen 
+        name={StackNames.BasicDescriptionScreen}
+        component={BasicDescriptionScreen}
+      />
+      <Stack.Screen 
+        name={StackNames.InterestScreen}
+        component={InterestScreen}
+      />
+      {/* <Stack.Screen 
+        name={StackNames.AllSetScreen}
+        component={}
+      /> */}
     </Stack.Navigator>
     </>
   )

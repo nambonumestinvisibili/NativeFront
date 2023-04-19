@@ -1,4 +1,5 @@
 import { TransitionPresets } from '@react-navigation/stack'
+import StackNames from '../constants/stacks'
 
 export const STACK_STYLES = {
   ...TransitionPresets.ModalSlideFromBottomIOS,
@@ -15,4 +16,5 @@ export const STACK_STYLES = {
     backgroundColor: '#fff'
   },
   cardOverlayEnabled: true,
+  initialRouteName: StackNames.BasicIntoScreen
 }

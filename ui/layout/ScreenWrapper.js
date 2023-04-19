@@ -6,12 +6,12 @@ import ScreenHeader from "./ScreenHeader"
 const StyledView = styled.ScrollView`
   padding: 50px 24px 14px 24px;
 ` 
-const ScreenWrapper = ({ children, navigation }) => {
+const ScreenWrapper = ({ children, navigation, text }) => {
   return (
     <View>
     <StyledView showsVerticalScrollIndicator={false} >
       <GoBackHeader navigation={navigation} />
-      <ScreenHeader text={"The Notting Hills"} />
+      <ScreenHeader text={text} />
       <View>
         { children }
       </View>

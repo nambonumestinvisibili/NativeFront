@@ -4,7 +4,11 @@ const StackNames = {
   DetailedSiteScreen: "DetailedSiteScreen",
   SiteCreationScreen: "SiteCreationScreen",
   AuthScreen: "AuthScreen",
-  SignupScreen: "SignupScreen"
+  SignupScreen: "SignupScreen",
+  BasicIntoScreen: "BasicIntoScreen",
+  BasicDescriptionScreen: "BasicDescriptionScreen",
+  InterestScreen: "InterestScreen",
+  AllSetScreen: "AllSetScreen"
 }
 
 export default StackNames

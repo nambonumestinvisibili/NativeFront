@@ -23,7 +23,7 @@ const devCredentials = [
   }
 ]
 
-const AuthScreen = ({ navigation }) => {
+const LoginScreen = ({ navigation }) => {
   
   const { api } = useApi()
   const dispatch = useDispatch()
@@ -45,7 +45,7 @@ const AuthScreen = ({ navigation }) => {
   }, [token])
 
   return (
-    <ScreenWrapper>
+    <ScreenWrapper navigation={navigation}>
       <Input labelText={"What's your email?"} onChangeText={(email) => setEmail(email)} />
       <Input labelText={"Password?"} onChangeText={(password) => setPassword(password)}/>
       <SubmitButton onPress={submitLogin}/>
@@ -64,4 +64,4 @@ const AuthScreen = ({ navigation }) => {
   )
 }
 
-export default AuthScreen
+export default LoginScreen

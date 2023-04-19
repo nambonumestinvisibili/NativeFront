@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import useApi from "../../api/api"
+import StackNames from "../../constants/stacks"
 import { selectJWT } from "../../store/reducers/authSlice"
 import Input from "../../ui/input/Input"
 import SubmitButton from "../../ui/input/SubmitButton"
@@ -19,13 +20,14 @@ const SignupScreen = ({ navigation }) => {
   const setToken = token => dispatch(updateJWT(token))
   
   const submitSignup = () => {
-    api.authApi.signUp(setToken, {
-      email, password, userName: username, givenName, familyName
-    })
+    // api.authApi.signUp(setToken, {
+    //   email, password, userName: username, givenName, familyName
+    // })
+    navigation.navigate(StackNames.BasicIntoScreen)
   }
 
   useEffect(() => {
-    token && navigation.push(StackNames.HomeScreen)
+    token && navigation.navigate(StackNames.HomeScreen)
   }, [token])
 
   return (
