@@ -1,4 +1,3 @@
-import React from 'react'
 import { useSelector } from 'react-redux'
 import BubbleSlide from '../../../components/BubbleSlide'
 import DetailTable from '../../../components/DetailTable'
@@ -10,7 +9,7 @@ import { selectCurrentAccent } from '../../../store/reducers/colorsSlice'
 import ExpansionType from '../../../ui/constants/ExpansionTypes'
 import UserPromo from '../../../ui/avatar/UserPromo'
 import Question from '../../../ui/question/Question'
-import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons'; 
+import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons'
 import SiteDescription from './SiteDescription'
 import Participants from '../../../ui/participants/Participants'
 
@@ -145,7 +144,7 @@ const siteData = [
   }
 ]
 
-const EventScreen = () => {
+const EventScreen = ({ details }) => {
   const color = useSelector(selectCurrentAccent)
   return (
     <>
@@ -155,7 +154,7 @@ const EventScreen = () => {
         touchable={false}
       />
       <Divider />
-      <SiteDescription text={"A xdd place to have a dinner with your loved ones"} />
+      <SiteDescription text={details?.description || ""} />
       <Divider />
       <UserPromo horizontal name="Patricia" bio="Friendly neighbourhood waitress" />
       <Divider />

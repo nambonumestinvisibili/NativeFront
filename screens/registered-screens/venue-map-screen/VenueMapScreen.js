@@ -1,6 +1,5 @@
-import React, { useEffect, useReducer, useState } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import MapView, { Marker, Callout } from 'react-native-maps'
+import { StyleSheet, View } from 'react-native'
+import MapView, { Marker } from 'react-native-maps'
 import VenueMarker from '../../../components/VenueMarker'
 import colors from '../../../constants/colors'
 import BubbleSlide from '../../../components/BubbleSlide'
@@ -18,7 +17,25 @@ const VenueMapScreen = ({ navigation }) => {
         longitude: region.longitude + 0.00030
       },
       description: "stuff...",
-      color: colors.ACCENTS.PINK
+      color: colors.ACCENTS.PINK,
+      venueDetails: {
+        name: "Venue",
+        description: "Some description....",
+        interests: [
+          {
+            "guid": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "name": "Interest1",
+          },
+          {
+            "guid": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "name": "Interest2",
+          },
+          {
+            "guid": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "name": "Interest3",
+          }
+        ]
+      }
 
     },
     {
@@ -70,8 +87,10 @@ const VenueMapScreen = ({ navigation }) => {
     }
   ]
 
-  const navigateToDetails = () => {
-    navigation.push(StackNames.DetailedSiteScreen)
+  const navigateToDetails = venueDetails => {
+    navigation.navigate(StackNames.DetailedSiteScreen, {
+      venueDetails
+    })
   }
   
   return (
@@ -87,7 +106,7 @@ const VenueMapScreen = ({ navigation }) => {
             coordinate={marker.latlng}
             title={marker.title}
             description={marker.description}
-            // onPress={navigateToDetails}
+            onPress={() => navigateToDetails(marker.venueDetails)}
           >
             <VenueMarker color={marker.color} />
           </Marker>
