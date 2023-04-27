@@ -1,44 +1,43 @@
-import { ScrollView, StyleSheet, View } from "react-native"
+import { ScrollView, View } from "react-native"
 import styled from "styled-components/native"
-import { padding } from "../../utils/layout"
 import GoBackHeader from "./GoBackHeader"
 import ScreenHeader from "./ScreenHeader"
  
 const ContentContainer = styled.View`
-  flex: 1;
   flex-direction: column;
   padding-bottom: 30px;
+  height: 90%;
   justify-content: ${({ contentOnTheBottom }) => 
     contentOnTheBottom ? 'flex-end' : 'flex-start'};
 `
 
-const styles = StyleSheet.create({
-  scrollView: {
-    ...padding(50, 24, 14, 24),
-    height: '100%',
-    flexDirection: 'column',
-    justifyContent: 'flex-start'
-  }
-})
+const Screen = styled.View`
+    padding: 50px 24px 50px 24px;
+    height: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+`
 
 const ScreenWrapper = ({ children, navigation, text, contentOnTheBottom }) => {
   return (
-    <View>
-      <ScrollView 
-        showsVerticalScrollIndicator={false} 
-        contentContainerStyle={styles.scrollView}
-      >
+    <Screen>
         <View>
           <GoBackHeader navigation={navigation} />
           <ScreenHeader text={text} />
         </View>
-        <ContentContainer contentOnTheBottom={contentOnTheBottom} >
-          <View>
+        <ContentContainer 
+          contentOnTheBottom={contentOnTheBottom} 
+        >
+          <ScrollView contentContainerStyle={{
+              flexGrow: 1, 
+              justifyContent: contentOnTheBottom ? 'flex-end' : 'flex-start', 
+            }} 
+            showsVerticalScrollIndicator={false}
+          >
             { children }
-          </View>
+          </ScrollView>
         </ContentContainer>
-      </ScrollView>
-    </View>
+    </Screen>
   )
 }
 
