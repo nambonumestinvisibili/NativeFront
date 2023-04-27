@@ -45,13 +45,14 @@ const LoginScreen = ({ navigation }) => {
   }, [token])
 
   return (
-    <ScreenWrapper navigation={navigation}>
+    <ScreenWrapper navigation={navigation} contentOnTheBottom>
       <Input labelText={"What's your email?"} onChangeText={(email) => setEmail(email)} />
       <Input labelText={"Password?"} onChangeText={(password) => setPassword(password)}/>
       <SubmitButton onPress={submitLogin}/>
       <Button text={"Signup?"} onPress={() => navigation.push(StackNames.SignupScreen)} />
-      { devCredentials.map(credential => (
+      { devCredentials.map((credential, idx) => (
         <Button
+          key={idx}
           text={credential.email}
           onPress={
             () => api.authApi.login(setToken, {
