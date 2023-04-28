@@ -1,16 +1,14 @@
-import React from 'react'
 import styled from 'styled-components'
 import { dividerSizes } from '../constants/style'
 
 const StyledView = styled.View`
-  height: 1;
+  height: 1px;
   margin: ${({ size }) => size};
 `
 
-const Divider = ({ size = dividerSizes.big }) => {
+const Divider = ({ size = dividerSizes.big, custom }) => {
   return (
-    <StyledView size={size}>
-
+    <StyledView size={custom ? `${custom}%` : size}>
     </StyledView>
   )
 }

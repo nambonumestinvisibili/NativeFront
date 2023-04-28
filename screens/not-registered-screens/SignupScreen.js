@@ -31,15 +31,14 @@ const SignupScreen = ({ navigation }) => {
   }, [token])
 
   return (
-    <ScreenWrapper navigation={navigation} >
+    <ScreenWrapper
+      text={'Sign up!'} 
+      navigation={navigation} 
+      contentOnTheBottom
+    >
       <Input labelText={"What's your email?"} onChangeText={(email) => setEmail(email)} />
       <Input labelText={"Password?"} onChangeText={(password) => setPassword(password)}/>
-      <Input labelText={"username"} onChangeText={(username) => setUsername(username)}/>
-      <Input labelText={"familyName"} onChangeText={(givenName) => setGivenName(givenName)}/>
-      <Input labelText={"givenName"} onChangeText={(familyName) => setFamilyName(familyName)}/>
-
       <SubmitButton onPress={submitSignup}/>
-      
     </ScreenWrapper>
   )
 }

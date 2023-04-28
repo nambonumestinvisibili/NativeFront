@@ -6,6 +6,7 @@ import SignupScreen from './SignupScreen';
 import BasicDescriptionScreen from './signup-screens/BasicDescriptionScreen';
 import InterestScreen from './signup-screens/InterestScreen';
 import BasicInfoScreen from './signup-screens/BasicInfoScreen';
+import AllSetScreen from './signup-screens/AllSetScreen';
 
 
 const Stack = createNativeStackNavigator()
@@ -36,10 +37,10 @@ const UnregisteredStack = () => {
         name={StackNames.InterestScreen}
         component={InterestScreen}
       />
-      {/* <Stack.Screen 
+      <Stack.Screen 
         name={StackNames.AllSetScreen}
-        component={}
-      /> */}
+        component={AllSetScreen}
+      />
     </Stack.Navigator>
     </>
   )
