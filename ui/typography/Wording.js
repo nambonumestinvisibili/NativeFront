@@ -1,7 +1,6 @@
 import styled from "styled-components"
 
 const StyledText = styled.Text`
-  font-family: 'Roboto';
   font-style: normal;
   font-weight: 300;
   font-size: ${({ small }) => small ? '14px' : '20px'};
