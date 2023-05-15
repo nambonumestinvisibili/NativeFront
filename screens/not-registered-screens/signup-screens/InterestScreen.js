@@ -178,7 +178,6 @@ const InterestScreen = ({ navigation }) => {
     if (state.includes(guid)) return state.filter(item => item !== guid)
     else return [...state, guid]
   }, [])
-  console.log(chosenInterests)
   
   return (
     <ScreenWrapper text={"Tell us more about yourself" } navigation={navigation}>

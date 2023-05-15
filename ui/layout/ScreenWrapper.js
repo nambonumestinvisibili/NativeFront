@@ -1,4 +1,5 @@
 import { ScrollView, View } from "react-native"
+import KeyboardAvoidingView from "react-native/Libraries/Components/Keyboard/KeyboardAvoidingView"
 import styled from "styled-components/native"
 import GoBackHeader from "./GoBackHeader"
 import ScreenHeader from "./ScreenHeader"
@@ -20,6 +21,7 @@ const Screen = styled.View`
 
 const ScreenWrapper = ({ children, navigation, text, contentOnTheBottom }) => {
   return (
+    <KeyboardAvoidingView behavior="padding">
     <Screen>
         <View>
           <GoBackHeader navigation={navigation} />
@@ -38,6 +40,7 @@ const ScreenWrapper = ({ children, navigation, text, contentOnTheBottom }) => {
           </ScrollView>
         </ContentContainer>
     </Screen>
+    </KeyboardAvoidingView>
   )
 }
 
