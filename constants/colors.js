@@ -8,7 +8,8 @@ const colors = {
   },
   BASIC: {
     WHITE: '#FFFFFF',
-    BLACK: '#212427'
+    BLACK: '#212427',
+    PRIMARY: '#1098F7'
   }
 }
 

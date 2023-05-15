@@ -1,3 +1,4 @@
+import colors from '../../constants/colors'
 import Button from './Button'
 
 const SubmitButton = ({ onPress }) => {
@@ -5,6 +6,8 @@ const SubmitButton = ({ onPress }) => {
     <Button 
       text={"Let's go"} 
       onPress={onPress}
+      color={colors.BASIC.PRIMARY}
+      isPressed={true}
       centered
     />
   )

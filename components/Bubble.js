@@ -1,5 +1,6 @@
 import { View } from 'react-native'
 import styled from 'styled-components/native'
+import colors from '../constants/colors'
 import { borderRadius, fontWeights } from '../constants/style'
 import { InvertedColorsBackground, InvertedColorsText } from '../ui/styles/InvertedColors'
 import shadowStyle from '../ui/styles/ShadowStyle'
@@ -32,6 +33,7 @@ const Bubble = ({
     text && 
     <View>
       <ButtonContainer
+        underlayColor={isPressed ? colors.BASIC.WHITE : color}
         onPress={onPress} 
         isPressed={isPressed} 
         color={color}
