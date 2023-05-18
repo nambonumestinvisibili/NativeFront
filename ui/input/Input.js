@@ -1,24 +1,18 @@
-import React from 'react'
-import { TextInput } from 'react-native'
 import styled from 'styled-components'
-import Capitals from '../typography/Capitals'
+import { UnderlinedInput } from '../styles/InvertedColors'
+import InputCapitals from './InputCapitals'
 
 const StyledInput = styled.TextInput`
-  borderBottomWidth: 1px;
-  borderBottomColor: black;
-`
-
-const StyledLabel = styled.View`
-  padding-top: 5;
+  ${UnderlinedInput}
 `
 
 const Input = ({ labelText, onChangeText }) => {
   return (
     <>
       <StyledInput onChangeText={onChangeText} />
-      <StyledLabel>
-        <Capitals text={labelText}/>
-      </StyledLabel>
+      <InputCapitals>
+        {labelText}
+      </InputCapitals>
     </>
   )
 }

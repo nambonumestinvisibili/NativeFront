@@ -6,7 +6,9 @@ const NATIVE_PATH = "api/"
 const BASE_URL = `${HOST}${NATIVE_PATH}`
 
 const PathPrefixes = {
-  Authentication: 'Authentication'
+  Interest: 'Interest',
+  Authentication: 'Authentication',
+  Profile: 'Profile'
 }
 
 const surroundWithRoot = urlPath => `${BASE_URL}${urlPath}`
@@ -20,25 +22,52 @@ const useApi = () => {
   const api = {
     interestApi: {
       getAll: setStateCallback => httpCall(get, 'Interest', setStateCallback),
+      
       postAllBody: (setStateCallback, stringData, dataB) => 
         httpCall(post, `Interest?stringData=${stringData}`, setStateCallback, { data: dataB })
     },
+
     authApi: {
       login: (setStateCallback, { email, password }) => 
         httpCall(post, `${PathPrefixes.Authentication}/login`, setStateCallback, {
            email, password
           }),
+
       signUp: (setStateCallback, { 
         email, 
         password,
-        userName,
-        givenName,
-        familyName 
       }) =>
         httpCall(post, `${PathPrefixes.Authentication}/signUp`, setStateCallback, {
-          email, password, userName, givenName, familyName
-        })
+          email, password
+        }),
+
+      registerBasics: (setStateCallback, { 
+        firstname, 
+        secondname,
+        birthday
+      }) =>
+        httpCall(post, `${PathPrefixes.Authentication}/register/basics`, setStateCallback, {
+          firstname, 
+          secondname,
+          birthday
+        }),
+
+      registerDescription: (setStateCallback, { 
+        bio, info
+      }) =>
+        httpCall(post, `${PathPrefixes.Authentication}/register/description`, setStateCallback, {
+          bio, info
+        }),
+        
+      registerInterests: (setStateCallback, { interestGuids }) =>
+        httpCall(post, `${PathPrefixes.Authentication}/register/interests`, setStateCallback, 
+          interestGuids
+        )
       
+    },
+
+    profileApi: {
+      getCurrentUserProfile: setStateCallback => httpCall(get, Profile, setStateCallback)
     }
   }
 

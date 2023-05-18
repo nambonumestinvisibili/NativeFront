@@ -17,3 +17,8 @@ export const InvertedColorsText = css`
   : color
   };
 `
+
+export const UnderlinedInput = css`
+  borderBottomWidth: 1px;
+  borderBottomColor: black;
+`

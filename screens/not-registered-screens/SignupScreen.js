@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import useApi from "../../api/api"
+import Divider from "../../components/Divider"
 import StackNames from "../../constants/stacks"
 import { selectJWT } from "../../store/reducers/authSlice"
 import Input from "../../ui/input/Input"
@@ -10,9 +11,6 @@ import ScreenWrapper from "../../ui/layout/ScreenWrapper"
 const SignupScreen = ({ navigation }) => {
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
-  const [username, setUsername] = useState()
-  const [givenName, setGivenName] = useState()
-  const [familyName, setFamilyName] = useState()
   
   const { api } = useApi()
   const dispatch = useDispatch()
@@ -21,7 +19,7 @@ const SignupScreen = ({ navigation }) => {
   
   const submitSignup = () => {
     // api.authApi.signUp(setToken, {
-    //   email, password, userName: username, givenName, familyName
+    //   email, password
     // })
     navigation.navigate(StackNames.BasicIntoScreen)
   }
@@ -37,7 +35,9 @@ const SignupScreen = ({ navigation }) => {
       contentOnTheBottom
     >
       <Input labelText={"What's your email?"} onChangeText={(email) => setEmail(email)} />
+      <Divider custom={5}/>
       <Input labelText={"Password?"} onChangeText={(password) => setPassword(password)}/>
+      <Divider custom={15}/>
       <SubmitButton onPress={submitSignup}/>
     </ScreenWrapper>
   )
