@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { FormProvider, useForm } from "react-hook-form"
 import { useDispatch, useSelector } from "react-redux"
 import useApi from "../../api/api"
 import Divider from "../../components/Divider"
@@ -16,6 +17,7 @@ const SignupScreen = ({ navigation }) => {
   const dispatch = useDispatch()
   const token = useSelector(selectJWT)
   const setToken = token => dispatch(updateJWT(token))
+  const {...methods} = useForm()
   
   const submitSignup = () => {
     // api.authApi.signUp(setToken, {
@@ -34,11 +36,13 @@ const SignupScreen = ({ navigation }) => {
       navigation={navigation} 
       contentOnTheBottom
     >
-      <Input labelText={"What's your email?"} onChangeText={(email) => setEmail(email)} />
-      <Divider custom={5}/>
-      <Input labelText={"Password?"} onChangeText={(password) => setPassword(password)}/>
-      <Divider custom={15}/>
-      <SubmitButton onPress={submitSignup}/>
+      <FormProvider {...methods}>
+        <Input name='email' labelText={"What's your email?"} onChangeText={(email) => setEmail(email)} />
+        <Divider custom={5}/>
+        <Input name='password' labelText={"Password?"} onChangeText={(password) => setPassword(password)}/>
+        <Divider custom={15}/>
+        <SubmitButton onPress={submitSignup}/>
+      </FormProvider>
     </ScreenWrapper>
   )
 }

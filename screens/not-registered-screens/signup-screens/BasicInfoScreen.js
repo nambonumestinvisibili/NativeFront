@@ -1,3 +1,4 @@
+import { FormProvider, useForm } from "react-hook-form"
 import useApi from "../../../api/api"
 import Divider from "../../../components/Divider"
 import StackNames from "../../../constants/stacks"
@@ -9,7 +10,8 @@ import ScreenWrapper from "../../../ui/layout/ScreenWrapper"
 const BasicInfoScreen = ({ navigation }) => {
 
   const { api } = useApi()
-
+  const {...methods} = useForm()
+  
   // const [firstname, setFirstName] = useEffect()
   // const [secondname, setSecondname] = useEffect()
   // const [birthday, setBirthday] = useEffect()
@@ -22,13 +24,15 @@ const BasicInfoScreen = ({ navigation }) => {
 
   return (
     <ScreenWrapper text={"Hello!"} navigation={navigation} contentOnTheBottom>
-      <Input labelText={"What's your name?"} />
-      <Divider custom={5}/>
-      <Input labelText={"What's your family name?"}  />
-      <Divider custom={5}/>
-      <DatePicker labelText={"When's your birthday?"} />
-      <Divider custom={15}/>
-      <SubmitButton onPress={() => navigation.push(StackNames.BasicDescriptionScreen)}/>
+      <FormProvider {...methods} >
+        <Input name='firstName' labelText={"What's your name?"} />
+        <Divider custom={5}/>
+        <Input name='secondName' labelText={"What's your family name?"}  />
+        <Divider custom={5}/>
+        <DatePicker labelText={"When's your birthday?"} />
+        <Divider custom={15}/>
+        <SubmitButton onPress={() => navigation.push(StackNames.BasicDescriptionScreen)}/>
+      </FormProvider>
     </ScreenWrapper>
   )
 }

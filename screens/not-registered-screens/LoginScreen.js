@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import ScreenWrapper from '../../ui/layout/ScreenWrapper';
 import Input from '../../ui/input/Input';
-import SubmitButton from '../../ui/input/SubmitButton';
 import useApi from '../../api/api';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectJWT, updateJWT } from '../../store/reducers/authSlice';
 import StackNames from '../../constants/stacks';
 import Button from '../../ui/input/Button';
+import Form from '../../ui/form/Form';
 
 const devCredentials = [
   {
@@ -46,10 +46,10 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <ScreenWrapper navigation={navigation} contentOnTheBottom>
-      <Input labelText={"What's your email?"} onChangeText={(email) => setEmail(email)} />
-      <Input labelText={"Password?"} onChangeText={(password) => setPassword(password)}/>
-      <SubmitButton onPress={submitLogin}/>
-      <Button text={"Signup?"} onPress={() => navigation.push(StackNames.SignupScreen)} />
+      <Form onSubmit={() => navigation.push(StackNames.SignupScreen)}>
+        <Input name='email' labelText={"What's your email?"}  />
+        <Input name='password' labelText={"Password?"} />
+      </Form>
       { devCredentials.map((credential, idx) => (
         <Button
           key={idx}
