@@ -1,8 +1,9 @@
-import { useController, useFormContext } from 'react-hook-form'
-import { Text } from 'react-native'
-import styled from 'styled-components'
-import { UnderlinedInput } from '../styles/InvertedColors'
-import InputCapitals from './InputCapitals'
+import { useController, useFormContext } from 'react-hook-form';
+import styled from 'styled-components';
+import { UnderlinedInput } from '../styles/InvertedColors';
+import InputCapitals from './InputCapitals';
+import { View } from 'react-native';
+import Error from '../form/Error';
 
 const StyledInput = styled.TextInput`
   ${UnderlinedInput}
@@ -36,10 +37,12 @@ const Input = ({
       <StyledInput 
         errorExists={fieldState.error} 
         onChangeText={field.onChange} />
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <InputCapitals>
             {labelText}
           </InputCapitals>
-      { fieldState.error && <Text></Text>}
+          { fieldState.error && <Error />}
+        </View>
     </>
   )
 }

@@ -9,7 +9,8 @@ const colors = {
   BASIC: {
     WHITE: '#FFFFFF',
     BLACK: '#212427',
-    PRIMARY: '#1098F7'
+    PRIMARY: '#1098F7',
+    ERROR: '#FF1053'
   }
 }
 
