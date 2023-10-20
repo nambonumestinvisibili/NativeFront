@@ -10,8 +10,8 @@ import Form from '../../ui/form/Form';
 
 const devCredentials = [
   {
-    email: "dawid1@native.pl",
-    password: "Password1!"
+    email: "dawid.holewa@gmail.com",
+    password: "Retikulum99!"
   },
   {
     email: "blazejkloc@gmail.com",
