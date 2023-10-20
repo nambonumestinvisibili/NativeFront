@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react'
+import { useEffect, useReducer } from 'react'
 import * as Location from 'expo-location'
 
 const useLocation = () => {
@@ -12,14 +12,14 @@ const useLocation = () => {
         longitude: newLocation.longitude,
       })
     },
-    {
+    { //todo: last used location
       latitude: 37.78825,
       longitude: -122.4324,
       latitudeDelta: 0.0922,
       longitudeDelta: 0.0321,
     })
 
-  useEffect(() => {
+  useEffect(() => { 
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync()
 

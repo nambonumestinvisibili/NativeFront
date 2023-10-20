@@ -8,7 +8,8 @@ const BASE_URL = `${HOST}${NATIVE_PATH}`
 const PathPrefixes = {
   Interest: 'Interest',
   Authentication: 'Authentication',
-  Profile: 'Profile'
+  Profile: 'Profile',
+  Venue: 'Venue'
 }
 
 const surroundWithRoot = urlPath => `${BASE_URL}${urlPath}`
@@ -68,6 +69,10 @@ const useApi = () => {
 
     profileApi: {
       getCurrentUserProfile: setStateCallback => httpCall(get, Profile, setStateCallback)
+    },
+
+    venueApi: {
+      getAllByLocation: (setStateCallback, area) => httpCall(post, `${PathPrefixes.Venue}/bylocation`, setStateCallback, { data: area })
     }
   }
 

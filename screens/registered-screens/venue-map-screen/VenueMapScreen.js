@@ -5,66 +5,16 @@ import colors from '../../../constants/colors'
 import BubbleSlide from '../../../components/BubbleSlide'
 import StackNames from '../../../constants/stacks'
 import useLocation from '../../../logic/useLocation'
+import useApi from '../../../api/api'
+import { useEffect, useState } from 'react'
 
 const VenueMapScreen = ({ navigation }) => {
 
   const { region } = useLocation()
 
-  const markers = [
-    {
-      latlng: {
-        latitude: region.latitude + 0.00030,
-        longitude: region.longitude + 0.00030
-      },
-      description: "stuff...",
-      color: colors.ACCENTS.PINK,
-      venueDetails: {
-        name: "Venue",
-        description: "Some description....",
-        interests: [
-          {
-            "guid": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-            "name": "Interest1",
-          },
-          {
-            "guid": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-            "name": "Interest2",
-          },
-          {
-            "guid": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-            "name": "Interest3",
-          }
-        ]
-      }
+  const { api } = useApi()
 
-    },
-    {
-      latlng: {
-        latitude: region.latitude - 0.0030,
-        longitude: region.longitude - 6 *  0.0030
-      },
-      description: "stuff...",
-      color: colors.ACCENTS.BURGUND
-    },
-    {
-      latlng: {
-        latitude: region.latitude + 5 * 0.0030,
-        longitude: region.longitude - 2 * 0.0030
-      },
-      description: "stuff...",
-      color: colors.ACCENTS.MUSTARD
-
-    },
-    {
-      latlng: {
-        latitude: region.latitude + 2* 0.0030,
-        longitude: region.longitude + 2* 0.0030
-      },
-      description: "stuff...",
-      color: colors.ACCENTS.MINT
-
-    }
-  ]
+  const [markers, setMarkers] = useState([])
 
   const bubblesConfig = [
     {
@@ -92,6 +42,17 @@ const VenueMapScreen = ({ navigation }) => {
       venueDetails
     })
   }
+
+  useEffect(() => {
+    api.venueApi.getAllByLocation(setMarkers, {
+      latitude: region.latitude,
+      longitude: region.longitude,
+      deltaLongitude: 3,
+      deltaLatitude: 3
+    })
+  }, [region])
+  console.log(markers)
+
   
   return (
     <View>
@@ -103,10 +64,10 @@ const VenueMapScreen = ({ navigation }) => {
         {markers.map((marker, index) => (
           <Marker
             key={index}
-            coordinate={marker.latlng}
-            title={marker.title}
+            coordinate={marker.location}
+            title={marker.name}
             description={marker.description}
-            onPress={() => navigateToDetails(marker.venueDetails)}
+            onPress={() => navigateToDetails(marker)}
           >
             <VenueMarker color={marker.color} />
           </Marker>
