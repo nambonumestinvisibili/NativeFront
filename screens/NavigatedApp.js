@@ -9,7 +9,7 @@ const NavigatedApp = () => {
 
   return (
     <>
-      { token
+      { !token
         ? <RegisteredStack />
         : <UnregisteredStack /> 
       }
