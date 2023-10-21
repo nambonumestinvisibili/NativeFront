@@ -9,10 +9,16 @@ url - ${urlWithParams}
 body - ${JSON.stringify(body)}
 ` 
 
-const onResponseStatus = (responseStatus, setStateCallback, responseBody) => {
-  responseStatus === 200 
-        ? (setStateCallback ? setStateCallback(responseBody) : null)
-        : console.log(responseBody)
+const onResponseStatus = (responseStatus, setStateCallback, responseBody, shouldBeLogging = false) => {
+  if(responseStatus === 200) {
+    setStateCallback ? setStateCallback(responseBody) : null
+    if (shouldBeLogging) {
+      console.log(`responseBody ${responseBody}`)
+    }
+  } 
+  else {
+    console.log(`Response is ${responseBody}`)
+  }
 }
 
 const processResponse = (resp, setStateCallback, method) => {
@@ -25,7 +31,7 @@ const processResponse = (resp, setStateCallback, method) => {
   const reactToOutput = responseBody =>
     onResponseStatus(responseStatus, setStateCallback, responseBody)
   
-  contentType === "application/json" 
+    contentType.includes("application/json") 
     ? resp.json().then(reactToOutput)
     : resp.text().then(reactToOutput)
 }

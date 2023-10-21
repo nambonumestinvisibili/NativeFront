@@ -47,11 +47,19 @@ const VenueMapScreen = ({ navigation }) => {
     api.venueApi.getAllByLocation(setMarkers, {
       latitude: region.latitude,
       longitude: region.longitude,
-      deltaLongitude: 3,
-      deltaLatitude: 3
+      deltaLongitude: 5,
+      deltaLatitude: 5
     })
-  }, [region])
-  console.log(markers)
+  }, [region.latitude, region.longitude])
+
+  // useEffect(() => {
+  //   api.venueApi.getAllByLocation(setMarkers, {
+  //     latitude: region.latitude,
+  //     longitude: region.longitude,
+  //     deltaLongitude: 3,
+  //     deltaLatitude: 3
+  //   })
+  // }, [region.latitude, region.longitude])
 
   
   return (
@@ -61,7 +69,7 @@ const VenueMapScreen = ({ navigation }) => {
         initialRegion={region} //todo: change to last user's location
         style={mapStyles}
       >
-        {markers.map((marker, index) => (
+        {Array.isArray(markers) && (markers.map((marker, index) => (
           <Marker
             key={index}
             coordinate={marker.location}
@@ -69,8 +77,9 @@ const VenueMapScreen = ({ navigation }) => {
             description={marker.description}
             onPress={() => navigateToDetails(marker)}
           >
+            {console.log("->aa>>>asa>>>>>>>>>>>as>d>>>>>>>>-", marker)}
             <VenueMarker color={marker.color} />
-          </Marker>
+          </Marker>)
         ))}
       </MapView>
       <View style={{position: 'absolute', bottom: 50, left: 20, right: 20}}>

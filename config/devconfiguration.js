@@ -1,1 +1,1 @@
-export const DEV_DOMAIN = "https://tallorangeski35.conveyor.cloud/";
+export const DEV_DOMAIN = "https://talltealphone28.conveyor.cloud/";
