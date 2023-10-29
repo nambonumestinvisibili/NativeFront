@@ -1,9 +1,6 @@
-import React, { useState } from 'react'
-import styled from 'styled-components/native'
-import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import { useState } from 'react';
+import styled from 'styled-components/native';
 import Icon from './Icon';
-import { iconSizes } from '../constants/style';
-import colors from '../constants/colors';
 import Description from '../ui/detail/Description';
 import Arrow from '../ui/icons/Arrow';
 import Expansion from '../ui/detail/Expansion';

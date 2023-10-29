@@ -13,8 +13,8 @@ const useLocation = () => {
       })
     },
     { //todo: last used location
-      latitude: 37.78825,
-      longitude: -122.4324,
+      latitude: 51.08653939799507,
+      longitude: 17.037822408617508,
       latitudeDelta: 0.0922,
       longitudeDelta: 0.0321,
     })

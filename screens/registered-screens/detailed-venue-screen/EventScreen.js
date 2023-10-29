@@ -9,20 +9,9 @@ import { selectCurrentAccent } from '../../../store/reducers/colorsSlice'
 import ExpansionType from '../../../ui/constants/ExpansionTypes'
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons'
 import SiteDescription from './SiteDescription'
-
-const hadnClapIconConfig = {
-  color: colors.BASIC.BLACK,
-  name: "hand-clap", 
-  size: iconSizes.big, 
-  family: MaterialCommunityIcons
-}
-
-const dislikeIconConfig = {
-  color: colors.BASIC.BLACK,
-  name: "thumbs-down", 
-  size: iconSizes.big, 
-  family: Entypo
-}
+import LikePanel from '../../../ui/detail/LikePanel'
+import { hadnClapIconConfig, dislikeIconConfig } from '../../../ui/icons/IconConfigs'
+import useApi from '../../../api/api'
 
 const addressConfig =   {
   icon: {
@@ -146,6 +135,24 @@ const SiteScreen = ({ details }) => {
     ...siteData
   ]
 
+  const { api } = useApi()
+
+  const visitAndRecommend = (hasProfileUpvoted) => {
+    api.venueApi.visitApiAndMarkAsUnOrRecommended(() => {}, {
+      venueGuid: venueDetails.guid,
+      hasProfileDownvoted: !hasProfileUpvoted,
+      hasProfileUpvoted: hasProfileUpvoted,
+    })
+  }
+
+  const visitVenueAndAddAsRecommended = () => {
+    visitAndRecommend(true)
+  }
+
+  const visitVenueAndAddAsUnrecommended = () => {
+    visitAndRecommend(false)
+  }
+
   return (
     <>
       <BubbleSlide 
@@ -153,6 +160,7 @@ const SiteScreen = ({ details }) => {
         bubbles={getInterestBubbles(venueDetails)}
         touchable={false}
       />
+      <LikePanel hasVoted={details.hasProfileVisited} recommendAction={visitVenueAndAddAsRecommended} unrecommendAction={visitVenueAndAddAsUnrecommended} />
       <Divider />
       <SiteDescription text={venueDetails?.description || ""} />
       <Divider />
