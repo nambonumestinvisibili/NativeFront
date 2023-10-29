@@ -72,7 +72,8 @@ const useApi = () => {
     },
 
     venueApi: {
-      getAllByLocation: (setStateCallback, area) => httpCall(post, `${PathPrefixes.Venue}/bylocation`, setStateCallback, area)
+      getAllByLocation: (setStateCallback, area) => httpCall(post, `${PathPrefixes.Venue}/bylocation`, setStateCallback, area),
+      getDetailedVenueByGuid: (setStateCallback, guid) => httpCall(get, `${PathPrefixes.Venue}/${guid}`, setStateCallback)
     }
   }
 

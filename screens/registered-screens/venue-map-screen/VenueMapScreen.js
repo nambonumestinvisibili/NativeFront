@@ -18,6 +18,7 @@ const VenueMapScreen = ({ navigation }) => {
   const [markers, setMarkers] = useState([])
   const [coordinatesAddedByUser, setMarkerAddedByUser] = useState()
   const [shouldMenuBeVisible, setShouldMenuBeVisible] = useState(false)
+  const [chosenVenue, setChosenVenue] = useState()
 
   const bubblesConfig = [
     {
@@ -41,9 +42,7 @@ const VenueMapScreen = ({ navigation }) => {
   ]
 
   const navigateToDetails = venueDetails => {
-    navigation.navigate(StackNames.DetailedSiteScreen, {
-      venueDetails
-    })
+    api.venueApi.getDetailedVenueByGuid(setChosenVenue, venueDetails.guid)
   }
 
   const getVenuesByLocation = (region) => {
@@ -95,6 +94,14 @@ const VenueMapScreen = ({ navigation }) => {
   useEffect(() => {
     setShouldMenuBeVisible(true)
   }, [coordinatesAddedByUser])
+
+  useEffect(() => {
+    console.log("map")
+    console.log(chosenVenue)
+    chosenVenue && navigation.navigate(StackNames.DetailedSiteScreen, {
+      chosenVenue
+    })
+  }, [chosenVenue])
 
   return (
     <View>

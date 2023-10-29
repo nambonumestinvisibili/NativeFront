@@ -7,106 +7,36 @@ import colors from '../../../constants/colors'
 import { iconSizes } from '../../../constants/style'
 import { selectCurrentAccent } from '../../../store/reducers/colorsSlice'
 import ExpansionType from '../../../ui/constants/ExpansionTypes'
-import UserPromo from '../../../ui/avatar/UserPromo'
-import Question from '../../../ui/question/Question'
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons'
 import SiteDescription from './SiteDescription'
-import Participants from '../../../ui/participants/Participants'
 
-const bubblesConfig = [
-  {
-    text: "Food",
+const hadnClapIconConfig = {
+  color: colors.BASIC.BLACK,
+  name: "hand-clap", 
+  size: iconSizes.big, 
+  family: MaterialCommunityIcons
+}
+
+const dislikeIconConfig = {
+  color: colors.BASIC.BLACK,
+  name: "thumbs-down", 
+  size: iconSizes.big, 
+  family: Entypo
+}
+
+const addressConfig =   {
+  icon: {
+    color: colors.BASIC.BLACK,
+    name: "location-pin", 
+    size: iconSizes.big, 
+    family: Entypo
   },
-  {
-    text: "Fine dining",
-  },
-  {
-    text: "Stunning view",
-  },
-  {
-    text: "Free",
-  },
-  {
-    text: "Paid",
-  },
-  {
-    text: "Bubble1",
-  }
-]
+  textBreakdown: [
+    { text: 'The Notting Hills 8', colored: false },
+  ]
+}
 
 const siteData = [
-  {
-    icon: {
-      color: colors.BASIC.BLACK,
-      name: "hand-clap", 
-      size: iconSizes.big, 
-      family: MaterialCommunityIcons
-    },
-    textBreakdown: [
-      { text: '1800', colored: true },
-      { text: 'users recommend', colored: false },
-    ],
-    expansion: {
-      type: ExpansionType.BREAKDOWN,
-      breakdown: [
-        {
-          amount: 10,
-          label: 'locals', 
-        },
-        {
-          amount: 21,
-          label: 'tourists', 
-        }
-      ]
-    }
-  },
-  {
-    icon: {
-      color: colors.BASIC.BLACK,
-      name: "thumbs-down", 
-      size: iconSizes.big, 
-      family: Entypo
-    },
-    textBreakdown: [
-      { text: '530', colored: true },
-      { text: 'users dislike', colored: false },
-    ],
-    expansion: {
-      type: ExpansionType.BREAKDOWN,
-      breakdown: [
-        {
-          amount: 1,
-          label: 'locals', 
-        },
-        {
-          amount: 331,
-          label: 'tourists', 
-        }
-      ]
-    }
-  },
-  {
-    icon: {
-      color: colors.BASIC.BLACK,
-      name: "location-pin", 
-      size: iconSizes.big, 
-      family: Entypo
-    },
-    textBreakdown: [
-      { text: 'The Notting Hills 8', colored: false },
-    ]
-  },
-  {
-    icon: {
-      color: colors.BASIC.BLACK,
-      name: "clock", 
-      size: iconSizes.big, 
-      family: MaterialCommunityIcons
-    },
-    textBreakdown: [
-      { text: '21:00 - till midnight', colored: false },
-    ]
-  },
   {
     icon: {
       color: colors.BASIC.BLACK,
@@ -144,30 +74,93 @@ const siteData = [
   }
 ]
 
-const EventScreen = ({ details }) => {
+const getRecommendations = (votes) => {
+  return ([
+    {
+      icon: hadnClapIconConfig,
+      textBreakdown: [
+        { text: votes.upVotes.total, colored: true },
+        { text: 'users recommend', colored: false },
+      ],
+      expansion: {
+        type: ExpansionType.BREAKDOWN,
+        breakdown: [
+          {
+            amount: votes.upVotes.localCount,
+            label: 'locals', 
+          },
+          {
+            amount: votes.upVotes.touristCount,
+            label: 'tourists', 
+          }
+        ]
+      }
+    },   
+    {
+      icon: dislikeIconConfig,
+      textBreakdown: [
+        { text: votes.downVotes.total, colored: true },
+        { text: 'users dislike', colored: false },
+      ],
+      expansion: {
+        type: ExpansionType.BREAKDOWN,
+        breakdown: [
+          {
+            amount: votes.downVotes.localCount,
+            label: 'locals', 
+          },
+          {
+            amount: votes.downVotes.touristCount,
+            label: 'tourists', 
+          }
+        ]
+      }
+  }])
+}
+
+const prepareDataForOpeningAndClosingTime = (venue) => ({
+  icon: {
+    color: colors.BASIC.BLACK,
+    name: "clock", 
+    size: iconSizes.big, 
+    family: MaterialCommunityIcons
+  },
+  textBreakdown: [
+    { text: `${venue.openingTime} - ${venue.closingTime}`, colored: false },
+  ]
+})
+
+const SiteScreen = ({ details }) => {
   const color = useSelector(selectCurrentAccent)
+
+  const venueDetails = details.venue
+  const votes = details.votes
+
+  const getInterestBubbles = (venueDetails) => venueDetails
+    ?.interests
+    .map(interest => ({ text: interest.name }))
+  
+  const prepareDataForDetails = (siteDetails, votes) => [
+    ...getRecommendations(votes),
+    prepareDataForOpeningAndClosingTime(siteDetails),
+    ...siteData
+  ]
+
   return (
     <>
       <BubbleSlide 
         color={color}
-        bubbles={bubblesConfig}
+        bubbles={getInterestBubbles(venueDetails)}
         touchable={false}
       />
       <Divider />
-      <SiteDescription text={details?.description || ""} />
+      <SiteDescription text={venueDetails?.description || ""} />
       <Divider />
-      <UserPromo horizontal name="Patricia" bio="Friendly neighbourhood waitress" />
-      <Divider />
-      <Question />
-      <Divider />
-      <Section title={"Details"} >
-        <DetailTable data={siteData}/>
-      </Section>
-      <Section title={"Participants"} expanded>
-        <Participants />
+      <Section title={"Details"} expanded>
+        <DetailTable data={prepareDataForDetails(venueDetails, votes)}/>
       </Section>
     </>
   )
 }
 
-export default EventScreen
+export default SiteScreen

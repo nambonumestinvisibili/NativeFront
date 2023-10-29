@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components'
 
 const StyledCapitals = styled.Text`
@@ -6,9 +5,9 @@ const StyledCapitals = styled.Text`
   text-transform: uppercase;
 `
 
-const Capitals = ({ text }) => {
+const Capitals = ({ title }) => {
   return (
-    <StyledCapitals>{text}</StyledCapitals>
+    <StyledCapitals>{title}</StyledCapitals>
   )
 }
 

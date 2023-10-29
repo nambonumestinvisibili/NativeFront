@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
-import styled from 'styled-components'
-import { selectCurrentAccent } from '../store/reducers/colorsSlice'
-import Arrow from '../ui/icons/Arrow'
-import Capitals from '../ui/typography/Capitals'
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import styled from 'styled-components';
+import { selectCurrentAccent } from '../store/reducers/colorsSlice';
+import Arrow from '../ui/icons/Arrow';
+import Capitals from '../ui/typography/Capitals';
 
 const ViewContainer = styled.View`
   border-bottom-width: 1px;
@@ -22,7 +22,7 @@ const Section = ({ title, children, expanded }) => {
   return (
     <>
       <ViewContainer color={color} >
-        <Capitals>{title}</Capitals>
+        <Capitals title={title} />
         <Arrow initialUp={!expanded} onPress={() => {
           setShowExpansion(!showExpansion)
         }} />
