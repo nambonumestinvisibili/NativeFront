@@ -1,4 +1,3 @@
-import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import styled from 'styled-components/native'
 import colors from '../constants/colors'
@@ -27,9 +26,9 @@ const shadowStyle = StyleSheet.create({
   shadowRadius: 30,
 })
 
-const VenueMarker = ({ color }) => {
+const VenueMarker = ({ color, onPress = () => {} }) => {
   return (
-    <View style={{...shadowStyle, shadowColor: color}}>
+    <View onPress={onPress} style={{...shadowStyle, shadowColor: color}}>
       <WhiteCircle>
         <VenueImage />
       </WhiteCircle>

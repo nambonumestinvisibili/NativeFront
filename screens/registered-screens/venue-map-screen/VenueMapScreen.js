@@ -7,6 +7,7 @@ import StackNames from '../../../constants/stacks'
 import useLocation from '../../../logic/useLocation'
 import useApi from '../../../api/api'
 import { useEffect, useState } from 'react'
+import Menu from '../../../ui/input/Menu'
 
 const VenueMapScreen = ({ navigation }) => {
 
@@ -15,6 +16,8 @@ const VenueMapScreen = ({ navigation }) => {
   const { api } = useApi()
 
   const [markers, setMarkers] = useState([])
+  const [coordinatesAddedByUser, setMarkerAddedByUser] = useState()
+  const [shouldMenuBeVisible, setShouldMenuBeVisible] = useState(false)
 
   const bubblesConfig = [
     {
@@ -43,31 +46,64 @@ const VenueMapScreen = ({ navigation }) => {
     })
   }
 
-  useEffect(() => {
+  const getVenuesByLocation = (region) => {
     api.venueApi.getAllByLocation(setMarkers, {
       latitude: region.latitude,
       longitude: region.longitude,
-      deltaLongitude: 5,
-      deltaLatitude: 5
+      deltaLongitude: 0.5 * region.longitudeDelta, //reat-native-maps delta is from top to bot. Native way is from top to center
+      deltaLatitude: 0.5 * region.latitudeDelta
     })
+  }
+
+  const onRegionChangeComplete = (region) => {
+    getVenuesByLocation(region)
+  }
+
+  const onMapPress = (e) => {
+    const coordinatesUserClicked = e.nativeEvent.coordinate
+    setMarkerAddedByUser(coordinatesUserClicked)
+    const isUserCoordinateInTheMap = markers.map(marker => marker.location)
+      .some(coord => 
+        coord.longitude === coordinatesUserClicked.longitude 
+        && coord.latitude === coordinatesUserClicked.latitude)
+    if (isUserCoordinateInTheMap) {
+      removePinAddedByUser()
+    }
+  }
+
+  const addNewVenue = () => {
+    
+  }
+
+  const removePinAddedByUser = () => {
+    setMarkerAddedByUser(null)
+  }
+
+  const onPressVenueMarker = (marker) => {
+    removePinAddedByUser()
+    navigateToDetails(marker)
+  }
+
+  const closeMenu = () => {
+    removePinAddedByUser()
+  }
+
+  useEffect(() => {
+    getVenuesByLocation(region)
   }, [region.latitude, region.longitude])
 
-  // useEffect(() => {
-  //   api.venueApi.getAllByLocation(setMarkers, {
-  //     latitude: region.latitude,
-  //     longitude: region.longitude,
-  //     deltaLongitude: 3,
-  //     deltaLatitude: 3
-  //   })
-  // }, [region.latitude, region.longitude])
+  useEffect(() => {
+    setShouldMenuBeVisible(true)
+  }, [coordinatesAddedByUser])
 
-  
   return (
     <View>
       <MapView 
         region={region}
         initialRegion={region} //todo: change to last user's location
         style={mapStyles}
+        onPress={onMapPress}
+        onRegionChangeComplete={onRegionChangeComplete}
       >
         {Array.isArray(markers) && (markers.map((marker, index) => (
           <Marker
@@ -75,16 +111,31 @@ const VenueMapScreen = ({ navigation }) => {
             coordinate={marker.location}
             title={marker.name}
             description={marker.description}
-            onPress={() => navigateToDetails(marker)}
+            onPress={() => onPressVenueMarker(marker)}
           >
-            {console.log("->aa>>>asa>>>>>>>>>>>as>d>>>>>>>>-", marker)}
             <VenueMarker color={marker.color} />
           </Marker>)
         ))}
+        {coordinatesAddedByUser && <Marker
+          key={"markerAddedByUser"}
+          coordinate={coordinatesAddedByUser}
+        >
+            <VenueMarker 
+              color={colors.BASIC.ERROR}
+              onPress={removePinAddedByUser} 
+            />
+          </Marker>}
       </MapView>
       <View style={{position: 'absolute', bottom: 50, left: 20, right: 20}}>
         <BubbleSlide bubbles={bubblesConfig} color={colors.ACCENTS.PINK}/>
       </View>
+      { coordinatesAddedByUser && 
+        <Menu
+          closeMenu={() => closeMenu()} 
+          menuOptions={[{ 
+          text: "Add new venue",
+          onPress: addNewVenue 
+        }]} />}
     </View>
   )
 }

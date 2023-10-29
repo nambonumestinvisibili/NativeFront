@@ -1,8 +1,5 @@
-import React from 'react'
-import Bubble from './Bubble'
-import { Entypo } from '@expo/vector-icons'; 
+import { Entypo } from '@expo/vector-icons';
 import styled from 'styled-components';
-import { TouchableHighlight } from 'react-native';
 import { InvertedColorsBackground, InvertedColorsText } from '../ui/styles/InvertedColors';
 import { borderRadius } from '../constants/style';
 
