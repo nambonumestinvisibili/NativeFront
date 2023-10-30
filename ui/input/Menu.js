@@ -1,4 +1,4 @@
-import { Text, View } from "react-native"
+import { Text, TouchableOpacity, View } from "react-native"
 import colors from "../../constants/colors"
 import { borderRadius } from "../../constants/style"
 import CloseIcon from "../icons/CloseIcon"
@@ -28,7 +28,7 @@ const Menu = ({ menuOptions, closeMenu }) => {
 
 const MenuOption = ({ text, onPress, isFirst }) => {
   return (
-    <View style={{ 
+    <TouchableOpacity style={{ 
       paddingTop: 30,
       paddingBottom: 30,
       paddingLeft: 5,
@@ -44,7 +44,7 @@ const MenuOption = ({ text, onPress, isFirst }) => {
         }}>
         {text}
       </Text>
-    </View>
+    </TouchableOpacity>
   )
 }
 

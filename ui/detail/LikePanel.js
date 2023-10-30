@@ -18,7 +18,6 @@ const StyledWrapper = styled.View`
 `
 
 const LikePanel = ({ recommendAction, unrecommendAction, hasVoted }) => {
-  console.log(hasVoted)
   return (
     <StyledWrapper>
       <StyledRow>

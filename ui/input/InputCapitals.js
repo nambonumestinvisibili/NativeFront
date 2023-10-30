@@ -8,7 +8,7 @@ const StyledLabel = styled.View`
 const InputCapitals = ({ children }) => {
   return (
     <StyledLabel>
-      <Capitals text={children}/>
+      <Capitals title={children}/>
     </StyledLabel>
   )
 }

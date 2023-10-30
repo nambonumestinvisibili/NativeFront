@@ -1,9 +1,17 @@
-import React from 'react'
-import { Text } from 'react-native'
+import Form from '../../../ui/form/Form';
+import Input from '../../../ui/input/Input';
+import ScreenWrapper from "../../../ui/layout/ScreenWrapper";
 
-const SiteCreationScreen = () => {
+const SiteCreationScreen = ({navigation, route}) => {
+  const { coordinates } = route.params
+
   return (
-    <Text>SiteCreationScreen</Text>
+    <ScreenWrapper navigation={navigation}>
+      <Form onSubmit={() => {}}>
+        <Input name="name" labelText={"Name of the venue"} />
+        <Input name="description" labelText={"Describe the venue in a few words"} />
+      </Form>
+    </ScreenWrapper>
   )
 }
 

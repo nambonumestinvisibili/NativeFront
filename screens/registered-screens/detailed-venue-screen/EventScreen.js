@@ -160,7 +160,11 @@ const SiteScreen = ({ details }) => {
         bubbles={getInterestBubbles(venueDetails)}
         touchable={false}
       />
-      <LikePanel hasVoted={details.hasProfileVisited} recommendAction={visitVenueAndAddAsRecommended} unrecommendAction={visitVenueAndAddAsUnrecommended} />
+      <LikePanel 
+        hasVoted={details.hasProfileVisited} 
+        recommendAction={visitVenueAndAddAsRecommended} 
+        unrecommendAction={visitVenueAndAddAsUnrecommended} 
+      />
       <Divider />
       <SiteDescription text={venueDetails?.description || ""} />
       <Divider />

@@ -4,9 +4,7 @@ import SiteScreen from './EventScreen';
 
 const DetailedVenueScreen = ({navigation, route}) => {
   const { chosenVenue } = route.params
-  console.log("detailed")
 
-  console.log(chosenVenue)
   useEffect(() => {
     
   }, [])

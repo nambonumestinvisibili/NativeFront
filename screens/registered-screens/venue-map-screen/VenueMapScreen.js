@@ -70,8 +70,10 @@ const VenueMapScreen = ({ navigation }) => {
     }
   }
 
-  const addNewVenue = () => {
-    
+  const addNewVenue = (coordinatesAddedByUser) => {
+    navigation.navigate(StackNames.SiteCreationScreen, {
+      coordinates: coordinatesAddedByUser
+    })
   }
 
   const removePinAddedByUser = () => {
@@ -96,8 +98,6 @@ const VenueMapScreen = ({ navigation }) => {
   }, [coordinatesAddedByUser])
 
   useEffect(() => {
-    console.log("map")
-    console.log(chosenVenue)
     chosenVenue && navigation.navigate(StackNames.DetailedSiteScreen, {
       chosenVenue
     })
@@ -107,7 +107,7 @@ const VenueMapScreen = ({ navigation }) => {
     <View>
       <MapView 
         region={region}
-        initialRegion={region} //todo: change to last user's location
+        initialRegion={region}
         style={mapStyles}
         onPress={onMapPress}
         onRegionChangeComplete={onRegionChangeComplete}
@@ -141,7 +141,7 @@ const VenueMapScreen = ({ navigation }) => {
           closeMenu={() => closeMenu()} 
           menuOptions={[{ 
           text: "Add new venue",
-          onPress: addNewVenue 
+          onPress: () => addNewVenue(coordinatesAddedByUser) 
         }]} />}
     </View>
   )
