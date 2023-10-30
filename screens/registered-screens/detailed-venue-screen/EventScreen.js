@@ -26,7 +26,7 @@ const addressConfig =   {
   ]
 }
 
-const siteData = [
+const comments = [
   {
     icon: {
       color: colors.BASIC.BLACK,
@@ -135,7 +135,6 @@ const SiteScreen = ({ details }) => {
   const prepareDataForDetails = (siteDetails, votes) => [
     ...getRecommendations(votes),
     prepareDataForOpeningAndClosingTime(siteDetails),
-    ...siteData
   ]
 
   const { api } = useApi()
