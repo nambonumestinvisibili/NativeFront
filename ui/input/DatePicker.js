@@ -1,5 +1,6 @@
 
 import DateTimePicker from '@react-native-community/datetimepicker';
+import dayjs from 'dayjs';
 import { useState } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 import styled from 'styled-components';
@@ -9,6 +10,8 @@ import InputCapitals from './InputCapitals';
 const UnderlinedDatePicker = styled.View`
   ${UnderlinedInput}
 `
+
+const API_DATE_FORMAT = 'YYYY-MM-DD'
 
 const DatePicker = ({ name, labelText, optional, rules, defaultValue }) => {
   const [date, setDate] = useState(new Date())
@@ -29,7 +32,8 @@ const DatePicker = ({ name, labelText, optional, rules, defaultValue }) => {
 
   const changeValue = (event, date) => {
     console.log(event, date)
-    field.onChange(event)
+    const formattedDate = dayjs(date).format(API_DATE_FORMAT)
+    field.onChange(formattedDate)
   }
 
   return (

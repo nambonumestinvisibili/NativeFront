@@ -12,12 +12,14 @@ import useApi from '../../../api/api';
 const InterestScreen = ({ navigation }) => {
 
   const { api } = useApi()
-  const [interests, setInterests] = useState([])
+  const [chosenInterests, setChosenInterests] = useState([])
 
   const onSubmit = () => {
     api.authApi.registerInterests(() => {
       navigation.push(StackNames.AllSetScreen)
-    }, interests)
+    }, {
+      interestGuids: chosenInterests
+    })
   }
   
   return (
@@ -29,7 +31,7 @@ const InterestScreen = ({ navigation }) => {
       </View>
       <View>
         <Divider />
-        <Interests interests={interests} setInterests={setInterests} />
+        <Interests setChosenInterests={setChosenInterests} />
       </View>
       <SubmitButton onPress={onSubmit}/>
       

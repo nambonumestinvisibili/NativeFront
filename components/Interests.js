@@ -1,4 +1,5 @@
 import { useReducer } from 'react';
+import { useState } from 'react';
 import { useEffect } from 'react';
 import { ScrollView, View } from 'react-native';
 import useApi from '../api/api';
@@ -7,9 +8,11 @@ import { dividerSizes } from '../constants/style';
 import Bubble from './Bubble';
 import Divider from './Divider';
 
-const Interests = ({ interests, setInterests }) => {
+const Interests = ({ setChosenInterests }) => {
 
   const { api } = useApi()
+
+  const [interests, setInterests] = useState([])
 
   const prepareInterests = apiInterests => {
 
@@ -29,7 +32,13 @@ const Interests = ({ interests, setInterests }) => {
     else return [...state, guid]
   }, [])
 
-  console.log(chosenInterests)
+  const onBubblePress = (guid) => {
+    addToChosenInterests(guid)
+  }
+
+  useEffect(() => {
+    setChosenInterests(chosenInterests)
+  }, [chosenInterests])
 
   useEffect(() => {
     api.interestApi.getAll((x) => prepareInterests(x))
@@ -46,11 +55,12 @@ const Interests = ({ interests, setInterests }) => {
               <>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                   {category.items.slice(idx*howManyInOneLine, howManyInOneLine*(idx+1))
-                    .map(item => (
+                    .map((item, idx2) => (
                     <Bubble 
+                      key={`${idx}${idx2}`}
                       color={category.color} 
                       text={item.name}
-                      onPress={() => addToChosenInterests(item.guid)}
+                      onPress={() => onBubblePress(item.guid)}
                       isPressed={chosenInterests.includes(item.guid)}
                     />
                   ))}

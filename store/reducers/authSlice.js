@@ -10,9 +10,11 @@ export const authSlice = createSlice({
   reducers: {
     updateJWT: (state, action) => {
       state.jwt = action.payload
+      state.signupTokenJwt = null
     },
     updateSignupJWT: (state, action) => {
       state.signupTokenJwt = action.payload
+      state.jwt = null
     },
     removeJWT: (state) => {
       state.jwt = null

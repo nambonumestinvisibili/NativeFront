@@ -54,10 +54,10 @@ const useApi = () => {
         }),
 
       registerDescription: (setStateCallback, { 
-        bio, info
+        bio, intro
       }) =>
         httpCall(post, `${PathPrefixes.Authentication}/register/description`, setStateCallback, {
-          bio, info
+          bio, intro
         }),
         
       registerInterests: (setStateCallback, { interestGuids }) =>
