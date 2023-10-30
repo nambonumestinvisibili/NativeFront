@@ -12,6 +12,7 @@ import SiteDescription from './SiteDescription'
 import LikePanel from '../../../ui/detail/LikePanel'
 import { hadnClapIconConfig, dislikeIconConfig } from '../../../ui/icons/IconConfigs'
 import useApi from '../../../api/api'
+import dayjs from 'dayjs'
 
 const addressConfig =   {
   icon: {
@@ -107,6 +108,8 @@ const getRecommendations = (votes) => {
   }])
 }
 
+const formatHours = time => dayjs(`2000-01-01T${time}`).format("HH:mm")
+
 const prepareDataForOpeningAndClosingTime = (venue) => ({
   icon: {
     color: colors.BASIC.BLACK,
@@ -115,7 +118,7 @@ const prepareDataForOpeningAndClosingTime = (venue) => ({
     family: MaterialCommunityIcons
   },
   textBreakdown: [
-    { text: `${venue.openingTime} - ${venue.closingTime}`, colored: false },
+    { text: `${formatHours(venue.openingTime)} - ${formatHours(venue.closingTime)}`, colored: false },
   ]
 })
 

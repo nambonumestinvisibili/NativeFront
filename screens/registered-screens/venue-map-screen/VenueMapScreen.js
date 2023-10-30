@@ -2,7 +2,6 @@ import { StyleSheet, View } from 'react-native'
 import MapView, { Marker } from 'react-native-maps'
 import VenueMarker from '../../../components/VenueMarker'
 import colors from '../../../constants/colors'
-import BubbleSlide from '../../../components/BubbleSlide'
 import StackNames from '../../../constants/stacks'
 import useLocation from '../../../logic/useLocation'
 import useApi from '../../../api/api'
@@ -19,27 +18,7 @@ const VenueMapScreen = ({ navigation }) => {
   const [coordinatesAddedByUser, setMarkerAddedByUser] = useState()
   const [shouldMenuBeVisible, setShouldMenuBeVisible] = useState(false)
   const [chosenVenue, setChosenVenue] = useState()
-
-  const bubblesConfig = [
-    {
-      text: "Food",
-    },
-    {
-      text: "Fine dining",
-    },
-    {
-      text: "Stunning view",
-    },
-    {
-      text: "Free",
-    },
-    {
-      text: "Paid",
-    },
-    {
-      text: "Bubble1",
-    }
-  ]
+  var lastCallTimeStamp = null;
 
   const navigateToDetails = venueDetails => {
     api.venueApi.getDetailedVenueByGuid(setChosenVenue, venueDetails.guid)
@@ -133,9 +112,9 @@ const VenueMapScreen = ({ navigation }) => {
             />
           </Marker>}
       </MapView>
-      <View style={{position: 'absolute', bottom: 50, left: 20, right: 20}}>
+      {/* <View style={{position: 'absolute', bottom: 50, left: 20, right: 20}}>
         <BubbleSlide bubbles={bubblesConfig} color={colors.ACCENTS.PINK}/>
-      </View>
+      </View> */}
       { coordinatesAddedByUser && 
         <Menu
           closeMenu={() => closeMenu()} 

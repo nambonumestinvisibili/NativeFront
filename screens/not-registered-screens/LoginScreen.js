@@ -50,7 +50,7 @@ const LoginScreen = ({ navigation }) => {
       <Form onSubmit={submitLogin}>
         <Input name='email' labelText={"What's your email?"}  />
         <Divider />
-        <Input name='password' labelText={"Password?"} />
+        <Input name='password' labelText={"Password?"} secureTextEntry />
         <Divider />
       </Form>
       <View style={{ display: 'flex', alignItems: 'center' }}>

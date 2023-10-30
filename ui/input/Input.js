@@ -15,7 +15,8 @@ const Input = ({
   name,
   rules,
   optional,
-  defaultValue
+  defaultValue,
+  secureTextEntry = false
 }) => {
   
   const { control } = useFormContext()
@@ -36,7 +37,9 @@ const Input = ({
     <>
       <StyledInput 
         errorExists={fieldState.error} 
-        onChangeText={field.onChange} />
+        onChangeText={field.onChange}
+        secureTextEntry={secureTextEntry} 
+      />
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <InputCapitals>
             {labelText}
