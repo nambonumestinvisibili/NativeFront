@@ -1,4 +1,3 @@
-import { useForm } from "react-hook-form"
 import useApi from "../../../api/api"
 import Divider from "../../../components/Divider"
 import Form from "../../../ui/form/Form"
@@ -9,11 +8,6 @@ import ScreenWrapper from "../../../ui/layout/ScreenWrapper"
 const BasicInfoScreen = ({ navigation }) => {
 
   const { api } = useApi()
-  const {...methods} = useForm()
-  
-  // const [firstname, setFirstName] = useEffect()
-  // const [secondname, setSecondname] = useEffect()
-  // const [birthday, setBirthday] = useEffect()
 
   // const onSubmit = () => {
   //   api.authApi.registerBasics(() => {}, {
@@ -32,7 +26,7 @@ const BasicInfoScreen = ({ navigation }) => {
         <Divider custom={5}/>
         <Input name='secondName' labelText={"What's your family name?"}  />
         <Divider custom={5}/>
-        <DatePicker labelText={"When's your birthday?"} />
+        <DatePicker name="birthday" labelText={"When's your birthday?"} />
         <Divider custom={15}/>
       </Form>
     </ScreenWrapper>

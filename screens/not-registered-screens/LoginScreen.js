@@ -53,7 +53,7 @@ const LoginScreen = ({ navigation }) => {
         <Button
           key="button"
           text={"Don't have an account yet?"}
-          onPress={() => navigation.push(StackNames.SignupScreen)}
+          onPress={() => navigation.push(StackNames.BasicInfoScreen)}
           color={colors.BASIC.PRIMARY}
         />
       </View>
