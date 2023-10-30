@@ -6,6 +6,8 @@ import * as SplashScreen from 'expo-splash-screen'
 import useSplashScreen from './logic/useSplashScreen'
 import { Logs } from 'expo'
 import NavigatedApp from './screens/NavigatedApp'
+import LoadingScreen from './components/LoadingScreen'
+import ErrorScreen from './components/ErrorScreen'
 
 SplashScreen.preventAutoHideAsync()
 Logs.enableExpoCliLogging()
@@ -22,6 +24,8 @@ export default function App() {
 
   return (
     <Provider store={store}>
+      <LoadingScreen />
+      <ErrorScreen />
       <NavigationContainer onReady={onLayoutRootView}>
         <NavigatedApp />
       </NavigationContainer>

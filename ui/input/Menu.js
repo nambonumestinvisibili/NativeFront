@@ -1,15 +1,13 @@
 import { Text, TouchableOpacity, View } from "react-native"
 import colors from "../../constants/colors"
 import { borderRadius } from "../../constants/style"
-import CloseIcon from "../icons/CloseIcon"
+import CloseButton from "./CloseButton"
 
 const Menu = ({ menuOptions, closeMenu }) => {
 
   return (
       <View style={{position: 'absolute', bottom: 50, left: 20, right: 20}}>
-        <View style={{position: 'absolute', zIndex: 30, right: 0, top: -10 }}>
-          <CloseIcon onPress={closeMenu} />
-        </View>
+        <CloseButton onPress={closeMenu} right={-10} top={0} />
         <View style={{ 
           backgroundColor: colors.BASIC.PRIMARY,
           borderRadius: borderRadius.basic,
@@ -33,8 +31,6 @@ const MenuOption = ({ text, onPress, isFirst }) => {
       paddingBottom: 30,
       paddingLeft: 5,
       paddingRight: 5,
-      // borderTopWidth: !isFirst && 1,
-      // borderColor: !isFirst && colors.ACCENTS.WHITE,
       }}
       onPress={onPress}
       >

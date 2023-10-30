@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { startLoading, stopLoading, showError } from '../store/reducers/appBehaviourSlice';
 import { selectJWT, selectSignupJWT } from '../store/reducers/authSlice';
-import { showSpinner, hideSpinner } from '../store/reducers/spinnerSlice';
 
 const createLog = (urlWithParams, body) => `
 attempting to make a http call: -
@@ -9,19 +8,24 @@ url - ${urlWithParams}
 body - ${JSON.stringify(body)}
 ` 
 
-const onResponseStatus = (responseStatus, setStateCallback, responseBody, shouldBeLogging = false) => {
-  if(responseStatus === 200) {
+const startsWith = (number, firstNumber) => number?.toString().charAt(0) === firstNumber.toString()
+
+const onResponseStatus = (responseStatus, setStateCallback, responseBody, showError, shouldBeLogging = false) => {
+  if(startsWith(responseStatus, 2)) {
     setStateCallback ? setStateCallback(responseBody) : null
     if (shouldBeLogging) {
       console.log(`responseBody ${responseBody}`)
     }
   } 
+  else if (startsWith(responseStatus, 5)) {
+    showError()
+  }
   else {
     console.log(`Response is ${responseBody}`)
   }
 }
 
-const processResponse = (resp, setStateCallback, method) => {
+const processResponse = (resp, setStateCallback, method, showError) => {
   const responseStatus = resp.status
   const responseUrl = resp.url
   console.log(`${(method, responseUrl)} responsed with status ${responseStatus}`)
@@ -29,7 +33,7 @@ const processResponse = (resp, setStateCallback, method) => {
   const contentType = resp.headers.get("Content-Type") 
 
   const reactToOutput = responseBody =>
-    onResponseStatus(responseStatus, setStateCallback, responseBody)
+    onResponseStatus(responseStatus, setStateCallback, responseBody, showError)
   
     contentType.includes("application/json") 
     ? resp.json().then(reactToOutput)
@@ -40,9 +44,8 @@ export const useHttp = () => {
     const dispatch = useDispatch()
     const JWTToken = useSelector(selectJWT)
     const signupJWTToken = useSelector(selectSignupJWT)
-    
-    const [error, setError] = useState('');
-    const [loading, setloading] = useState(true);
+
+    const showErrorScreen = () => dispatch(showError())
 
     const fetchData = (
       url, 
@@ -51,7 +54,7 @@ export const useHttp = () => {
       queryParams, 
       body, 
     ) => {
-        dispatch(showSpinner())
+        dispatch(startLoading())
 
         const urlWithParams = queryParams 
           ? `${url}?${queryParams.map(pair => 
@@ -70,13 +73,13 @@ export const useHttp = () => {
         }
 
         fetch(urlWithParams, fetchConfiguration)
-            .then(resp => processResponse(resp, setStateCallback, method))
+            .then(resp => processResponse(resp, setStateCallback, method, showErrorScreen))
             .catch(err => {
                 console.log(`fetch error: -  ${err}`)
-                setError(err);
+                showErrorScreen()
             })
             .finally(() => {
-                dispatch(hideSpinner())
+                dispatch(stopLoading())
             });
     };
 
