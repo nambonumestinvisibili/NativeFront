@@ -9,7 +9,8 @@ const PathPrefixes = {
   Interest: 'Interest',
   Authentication: 'Authentication',
   Profile: 'Profile',
-  Venue: 'Venue'
+  Venue: 'Venue',
+  Residence: 'Residence'
 }
 
 const surroundWithRoot = urlPath => `${BASE_URL}${urlPath}`
@@ -75,7 +76,26 @@ const useApi = () => {
       getAllByLocation: (setStateCallback, area) => httpCall(post, `${PathPrefixes.Venue}/bylocation`, setStateCallback, area),
       getDetailedVenueByGuid: (setStateCallback, guid) => httpCall(get, `${PathPrefixes.Venue}/${guid}`, setStateCallback),
       visitApiAndMarkAsUnOrRecommended: (setStateCallback, { venueGuid, hasProfileUpvoted, hasProfileDownvoted }) =>
-        httpCall(post,  `${PathPrefixes.Venue}/${venueGuid}/visit`, setStateCallback, { venueGuid, hasProfileUpvoted, hasProfileDownvoted })
+        httpCall(post,  `${PathPrefixes.Venue}/${venueGuid}/visit`, setStateCallback, { venueGuid, hasProfileUpvoted, hasProfileDownvoted }),
+      createNewVenue: (setStateCallback, request) => httpCall(post, `${PathPrefixes.Venue}`, setStateCallback, {
+        name: request.name,
+        description: request.description,
+        openingTime: {
+          hourOfDay: request.openingTime.hourOfDay,
+          minutesOfHour: request.openingTime.minutesOfHour
+        },
+        closingTime: {
+          hourOfDay: request.closingTime.hourOfDay,
+          minutesOfHour: request.closingTime.minutesOfHour
+        },
+        interestGuids: request.interestGuids,
+        longitude: request.longitude,
+        latitude: request.latitude
+      })
+    },
+
+    residenceApi: {
+      assignResidence: (setStateCallback, { latitude, longitude }) => httpCall(get, `${PathPrefixes.Residence}/assign?longitude=${longitude}&latitude=${latitude}`, setStateCallback)
     }
   }
 

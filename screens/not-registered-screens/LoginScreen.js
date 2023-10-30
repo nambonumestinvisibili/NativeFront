@@ -9,6 +9,8 @@ import Button from '../../ui/input/Button';
 import Form from '../../ui/form/Form';
 import colors from '../../constants/colors';
 import { View } from 'react-native';
+import { DEV_HELPERS_SET } from '../../config/devconfiguration';
+import Divider from '../../components/Divider';
 
 const devCredentials = [
   {
@@ -36,7 +38,7 @@ const LoginScreen = ({ navigation }) => {
   const submitLogin = (data) => {
     api.authApi.login(setToken, {
       email: data.email, password: data.password
-    }) // todo: don't log password
+    }) 
   }
 
   useEffect(() => {
@@ -47,7 +49,9 @@ const LoginScreen = ({ navigation }) => {
     <ScreenWrapper navigation={navigation} contentOnTheBottom>
       <Form onSubmit={submitLogin}>
         <Input name='email' labelText={"What's your email?"}  />
+        <Divider />
         <Input name='password' labelText={"Password?"} />
+        <Divider />
       </Form>
       <View style={{ display: 'flex', alignItems: 'center' }}>
         <Button
@@ -57,7 +61,7 @@ const LoginScreen = ({ navigation }) => {
           color={colors.BASIC.PRIMARY}
         />
       </View>
-      { devCredentials.map((credential, idx) => (
+      { DEV_HELPERS_SET && devCredentials.map((credential, idx) => (
         <Button
           key={idx}
           text={credential.email}

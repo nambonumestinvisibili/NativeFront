@@ -5,6 +5,7 @@ import { ScrollView, View } from 'react-native';
 import useApi from '../api/api';
 import colors from '../constants/colors';
 import { dividerSizes } from '../constants/style';
+import InputCapitals from '../ui/input/InputCapitals';
 import Bubble from './Bubble';
 import Divider from './Divider';
 
@@ -45,33 +46,39 @@ const Interests = ({ setChosenInterests }) => {
   }, [])
 
   return (
+    <>
+    <InputCapitals>
+      Pick a few interests!
+    </InputCapitals>
+    <Divider />
     <View>
-        {interests.map(category => {
-          const howManyInterest = category.items.length
-          const howManyLines = 3
-          const howManyInOneLine = howManyInterest / howManyLines
-          return (<>
-            {[...Array(howManyLines).keys()].map((_, idx) => (
-              <>
-                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                  {category.items.slice(idx*howManyInOneLine, howManyInOneLine*(idx+1))
-                    .map((item, idx2) => (
-                    <Bubble 
-                      key={`${idx}${idx2}`}
-                      color={category.color} 
-                      text={item.name}
-                      onPress={() => onBubblePress(item.guid)}
-                      isPressed={chosenInterests.includes(item.guid)}
-                    />
-                  ))}
-                </ScrollView>
-              <Divider size={dividerSizes.medium} />
-              </>
-            ))}
-            <Divider />
-          </>)
-        })}
+      {interests.map(category => {
+        const howManyInterest = category.items.length
+        const howManyLines = 3
+        const howManyInOneLine = howManyInterest / howManyLines
+        return (<>
+          {[...Array(howManyLines).keys()].map((_, idx) => (
+            <>
+              <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                {category.items.slice(idx*howManyInOneLine, howManyInOneLine*(idx+1))
+                  .map((item, idx2) => (
+                  <Bubble 
+                    key={`${idx}${idx2}`}
+                    color={category.color} 
+                    text={item.name}
+                    onPress={() => onBubblePress(item.guid)}
+                    isPressed={chosenInterests.includes(item.guid)}
+                  />
+                ))}
+              </ScrollView>
+            <Divider size={dividerSizes.medium} />
+            </>
+          ))}
+          <Divider />
+        </>)
+      })}
     </View>
+    </>
   )
 }
 

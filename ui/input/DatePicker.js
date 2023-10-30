@@ -13,7 +13,14 @@ const UnderlinedDatePicker = styled.View`
 
 const API_DATE_FORMAT = 'YYYY-MM-DD'
 
-const DatePicker = ({ name, labelText, optional, rules, defaultValue }) => {
+const DatePicker = ({ 
+  name, 
+  labelText, 
+  optional, 
+  rules, 
+  defaultValue,
+  mode 
+}) => {
   const [date, setDate] = useState(new Date())
   
   const { control } = useFormContext()
@@ -23,16 +30,24 @@ const DatePicker = ({ name, labelText, optional, rules, defaultValue }) => {
       ? ({...rules}) 
       : ({...rules, required: 'This field is required'})
 
-  const  { field, fieldState } = useController({
+  const  { field } = useController({
     name, 
     rules: createRules(), 
     defaultValue,
     control
   })
 
-  const changeValue = (event, date) => {
-    console.log(event, date)
-    const formattedDate = dayjs(date).format(API_DATE_FORMAT)
+  const changeValue = (_, date) => {
+    setDate(date)
+
+    const formattedDate =
+      mode === 'time' 
+        ? ({
+          hourOfDay: dayjs(date).format("HH"),
+          minutesOfHour: dayjs(date).format("mm")
+        })
+        : dayjs(date).format(API_DATE_FORMAT)
+        
     field.onChange(formattedDate)
   }
 
@@ -44,9 +59,9 @@ const DatePicker = ({ name, labelText, optional, rules, defaultValue }) => {
             alignSelf: 'left',
             backgroundColor: 'white',
           }}
-          mode="date"
           value={date}
           onChange={changeValue}
+          mode={mode ?? "date"}
         />
       </UnderlinedDatePicker>
       <InputCapitals>

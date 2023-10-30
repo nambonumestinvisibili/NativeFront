@@ -24,7 +24,6 @@ const useLocation = () => {
       let { status } = await Location.requestForegroundPermissionsAsync()
 
       if (status !== 'granted') {
-        //handle this...
         return;
       }
 

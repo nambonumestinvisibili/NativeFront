@@ -1,4 +1,3 @@
-import useLocation from "./useLocation"
 
 const useActionOnTheStartup = () => {
   const actionOnStartup = async () => { }

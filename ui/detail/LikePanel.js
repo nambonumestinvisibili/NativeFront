@@ -22,10 +22,10 @@ const LikePanel = ({ recommendAction, unrecommendAction, hasVoted }) => {
     <StyledWrapper>
       <StyledRow>
         <StyledCol flex={1}>
-          <Icon {...hadnClapIconConfig} color={hasVoted ? colors.BASIC.GRAY : colors.ACCENTS.PINK} onPress={hasVoted && recommendAction} />
+          <Icon {...hadnClapIconConfig} color={hasVoted ? colors.BASIC.GRAY : colors.ACCENTS.PINK} onPress={!hasVoted && recommendAction} />
         </StyledCol>
         <StyledCol flex={1}>
-          <Icon {...dislikeIconConfig} color={hasVoted ? colors.BASIC.GRAY : colors.ACCENTS.MINT} onPress={hasVoted && unrecommendAction}/>
+          <Icon {...dislikeIconConfig} color={hasVoted ? colors.BASIC.GRAY : colors.ACCENTS.MINT} onPress={!hasVoted && unrecommendAction}/>
         </StyledCol>
       </StyledRow>
       {hasVoted && (<StyledRow>

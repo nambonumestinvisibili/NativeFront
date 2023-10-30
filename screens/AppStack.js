@@ -1,7 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import StackNames from '../constants/stacks'
 import { STACK_STYLES } from '../utils/stack_config'
-import HomeScreen from './HomeScreen'
 import DetailedVenueScreen from './registered-screens/detailed-venue-screen/DetailedVenueScreen'
 import SiteCreationScreen from './registered-screens/site-creation-screen/SiteCreationScreen'
 import VenueMapScreen from './registered-screens/venue-map-screen/VenueMapScreen'
@@ -14,10 +13,6 @@ const RegisteredStack = () => {
     <RegisteredStackNavigator.Navigator
       screenOptions={({ navigation }) => (STACK_STYLES)}
     >
-      <RegisteredStackNavigator.Screen
-        name={StackNames.HomeScreen}
-        component={HomeScreen} 
-      />
       <RegisteredStackNavigator.Screen 
         name={StackNames.VenueMapScreen}
         component={VenueMapScreen}

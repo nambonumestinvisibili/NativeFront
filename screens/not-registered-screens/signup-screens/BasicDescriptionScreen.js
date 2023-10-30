@@ -1,7 +1,9 @@
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import useApi from '../../../api/api';
 import Divider from '../../../components/Divider';
 import StackNames from '../../../constants/stacks';
+import useLocation from '../../../logic/useLocation';
 import { updateDescriptions } from '../../../store/reducers/profileSlice';
 import WelcomeUserComponent from '../../../ui/avatar/WelcomeUserComponent';
 import Form from '../../../ui/form/Form';
@@ -12,6 +14,7 @@ const BasicDescriptionScreen = ({ navigation }) => {
 
   const { api } = useApi()
   const dispatch = useDispatch()
+  const { region } = useLocation()
 
   const onSubmit = (data) => {
     api.authApi.registerDescription(() => {
@@ -22,6 +25,14 @@ const BasicDescriptionScreen = ({ navigation }) => {
       intro: data.intro
     })
   }
+
+  useEffect(() => {
+    region && api.residenceApi.assignResidence(() => {}, {
+      latitude: region.latitude,
+      longitude: region.longitude
+    })
+  }, [region])
+  
   return (
     <ScreenWrapper 
       text={"Tell us more about yourself"} 

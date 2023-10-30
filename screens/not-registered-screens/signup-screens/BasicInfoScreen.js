@@ -1,3 +1,4 @@
+import { Text } from "react-native"
 import { useDispatch } from "react-redux"
 import useApi from "../../../api/api"
 import Divider from "../../../components/Divider"
@@ -26,6 +27,10 @@ const BasicInfoScreen = ({ navigation }) => {
   
   return (
     <ScreenWrapper text={"Hello!"} navigation={navigation} contentOnTheBottom>
+      <Text>Provide some basic info, so that other users can get to know you</Text>
+      <Divider />
+      <Text>We will also ask you for your location, so that we know what city is your native one!</Text>
+      <Divider custom={30}/>
       <Form onSubmit={onSubmit} >
         <Input name='firstName' labelText={"What's your name?"} />
         <Divider custom={5}/>

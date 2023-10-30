@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { selectBio, selectFirstname, selectIntro, selectSecondname } from '../../store/reducers/profileSlice'
+import { selectBio, selectFirstname } from '../../store/reducers/profileSlice'
 import Wording from '../typography/Wording'
 import Avatar from './Avatar'
 
@@ -22,8 +22,6 @@ const NameBioContainer = styled.View`
 const WelcomeUserComponent = () => {
 
   const firstName = useSelector(selectFirstname)
-  const secondName = useSelector(selectSecondname)
-  const intro = useSelector(selectIntro)
   const bio = useSelector(selectBio)
   
   return (
