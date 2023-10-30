@@ -1,6 +1,8 @@
+import { useDispatch } from 'react-redux';
 import useApi from '../../../api/api';
 import Divider from '../../../components/Divider';
 import StackNames from '../../../constants/stacks';
+import { updateDescriptions } from '../../../store/reducers/profileSlice';
 import WelcomeUserComponent from '../../../ui/avatar/WelcomeUserComponent';
 import Form from '../../../ui/form/Form';
 import Input from '../../../ui/input/Input';
@@ -9,9 +11,11 @@ import ScreenWrapper from '../../../ui/layout/ScreenWrapper';
 const BasicDescriptionScreen = ({ navigation }) => {
 
   const { api } = useApi()
+  const dispatch = useDispatch()
 
   const onSubmit = (data) => {
     api.authApi.registerDescription(() => {
+      dispatch(updateDescriptions({ bio: data.bio, intro: data.intro }))
       navigation.push(StackNames.InterestScreen)
     }, {
       bio: data.bio,
