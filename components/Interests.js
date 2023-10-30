@@ -1,5 +1,4 @@
 import { useReducer } from 'react';
-import { useState } from 'react';
 import { useEffect } from 'react';
 import { ScrollView, View } from 'react-native';
 import useApi from '../api/api';
@@ -8,11 +7,9 @@ import { dividerSizes } from '../constants/style';
 import Bubble from './Bubble';
 import Divider from './Divider';
 
-const Interests = ({ actionWithChosenInterests }) => {
+const Interests = ({ interests, setInterests }) => {
 
   const { api } = useApi()
-
-  const [interests, setInterests] = useState([])
 
   const prepareInterests = apiInterests => {
 

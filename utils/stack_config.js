@@ -16,5 +16,5 @@ export const STACK_STYLES = {
     backgroundColor: '#fff'
   },
   cardOverlayEnabled: true,
-  initialRouteName: StackNames.BasicIntoScreen
+  initialRouteName: StackNames.BasicInfoScreen
 }

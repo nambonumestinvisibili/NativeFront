@@ -5,7 +5,7 @@ const StackNames = {
   SiteCreationScreen: "SiteCreationScreen",
   AuthScreen: "AuthScreen",
   SignupScreen: "SignupScreen",
-  BasicIntoScreen: "BasicIntoScreen",
+  BasicInfoScreen: "BasicInfoScreen",
   BasicDescriptionScreen: "BasicDescriptionScreen",
   InterestScreen: "InterestScreen",
   AllSetScreen: "AllSetScreen"

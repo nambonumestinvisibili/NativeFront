@@ -5,9 +5,7 @@ const Form = ({ children, onSubmit, submitButtonText }) => {
   const {...methods} = useForm()
 
   const onSubmitWrapper = data => {
-    //collect all the fields?
-    // console.log(data)
-    onSubmit()
+    onSubmit(data)
   }
 
   const onError = () => {

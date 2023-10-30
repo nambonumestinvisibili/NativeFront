@@ -26,7 +26,7 @@ const UnregisteredStack = () => {
         component={SignupScreen}
       />
       <Stack.Screen 
-        name={StackNames.BasicIntoScreen}
+        name={StackNames.BasicInfoScreen}
         component={BasicInfoScreen}
       />
       <Stack.Screen 

@@ -1,33 +1,30 @@
-import { useState, useEffect } from "react"
-import { FormProvider, useForm } from "react-hook-form"
+import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import useApi from "../../api/api"
 import Divider from "../../components/Divider"
 import StackNames from "../../constants/stacks"
-import { selectJWT } from "../../store/reducers/authSlice"
+import { selectSignupJWT, updateSignupJWT } from "../../store/reducers/authSlice"
+import Form from "../../ui/form/Form"
 import Input from "../../ui/input/Input"
-import SubmitButton from "../../ui/input/SubmitButton"
 import ScreenWrapper from "../../ui/layout/ScreenWrapper"
 
 const SignupScreen = ({ navigation }) => {
-  const [email, setEmail] = useState()
-  const [password, setPassword] = useState()
-  
   const { api } = useApi()
   const dispatch = useDispatch()
-  const token = useSelector(selectJWT)
-  const setToken = token => dispatch(updateJWT(token))
-  const {...methods} = useForm()
+  const token = useSelector(selectSignupJWT)
+  const setToken = token => dispatch(updateSignupJWT(token))
   
-  const submitSignup = () => {
-    // api.authApi.signUp(setToken, {
-    //   email, password
-    // })
-    navigation.navigate(StackNames.BasicIntoScreen)
+  const submitSignup = data => {
+    api.authApi.signUp(token => {
+      console.log(token)
+      setToken(token)
+    }, {
+      email: data.email, password: data.password
+    })
   }
 
   useEffect(() => {
-    token && navigation.navigate(StackNames.HomeScreen)
+    token && navigation.push(StackNames.BasicInfoScreen)
   }, [token])
 
   return (
@@ -36,13 +33,12 @@ const SignupScreen = ({ navigation }) => {
       navigation={navigation} 
       contentOnTheBottom
     >
-      <FormProvider {...methods}>
-        <Input name='email' labelText={"What's your email?"} onChangeText={(email) => setEmail(email)} />
+      <Form onSubmit={submitSignup}>
+        <Input name='email' labelText={"What's your email?"} />
         <Divider custom={5}/>
-        <Input name='password' labelText={"Password?"} onChangeText={(password) => setPassword(password)}/>
+        <Input name='password' labelText={"Password?"} />
         <Divider custom={15}/>
-        <SubmitButton onPress={submitSignup}/>
-      </FormProvider>
+      </Form>
     </ScreenWrapper>
   )
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import ScreenWrapper from '../../ui/layout/ScreenWrapper';
 import Input from '../../ui/input/Input';
 import useApi from '../../api/api';
@@ -7,6 +7,8 @@ import { selectJWT, updateJWT } from '../../store/reducers/authSlice';
 import StackNames from '../../constants/stacks';
 import Button from '../../ui/input/Button';
 import Form from '../../ui/form/Form';
+import colors from '../../constants/colors';
+import { View } from 'react-native';
 
 const devCredentials = [
   {
@@ -28,15 +30,12 @@ const LoginScreen = ({ navigation }) => {
   const { api } = useApi()
   const dispatch = useDispatch()
   
-  const [email, setEmail] = useState()
-  const [password, setPassword] = useState()
-  
   const setToken = token => dispatch(updateJWT(token))
   const token = useSelector(selectJWT)
 
-  const submitLogin = () => {
+  const submitLogin = (data) => {
     api.authApi.login(setToken, {
-      email, password
+      email: data.email, password: data.password
     }) // todo: don't log password
   }
 
@@ -46,10 +45,18 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <ScreenWrapper navigation={navigation} contentOnTheBottom>
-      <Form onSubmit={() => navigation.push(StackNames.SignupScreen)}>
+      <Form onSubmit={submitLogin}>
         <Input name='email' labelText={"What's your email?"}  />
         <Input name='password' labelText={"Password?"} />
       </Form>
+      <View style={{ display: 'flex', alignItems: 'center' }}>
+        <Button
+          key="button"
+          text={"Don't have an account yet?"}
+          onPress={() => navigation.push(StackNames.SignupScreen)}
+          color={colors.BASIC.PRIMARY}
+        />
+      </View>
       { devCredentials.map((credential, idx) => (
         <Button
           key={idx}
