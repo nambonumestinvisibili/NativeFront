@@ -36,7 +36,7 @@ const SignupScreen = ({ navigation }) => {
       <Form onSubmit={submitSignup}>
         <Input name='email' labelText={"What's your email?"} />
         <Divider custom={5}/>
-        <Input name='password' labelText={"Password?"} />
+        <Input name='password' labelText={"Password?"} secureTextEntry />
         <Divider custom={15}/>
       </Form>
     </ScreenWrapper>
