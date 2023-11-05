@@ -8,7 +8,7 @@ export const fontWeights = {
 } 
 
 export const borderRadius = {
-  basic: '45px'
+  basic: '45',
 }
 
 export const fontSizes = {

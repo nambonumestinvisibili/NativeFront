@@ -30,11 +30,16 @@ const processResponse = (resp, setStateCallback, method, showError) => {
   const responseUrl = resp.url
   console.log(`${(method, responseUrl)} responsed with status ${responseStatus}`)
 
-  const contentType = resp.headers.get("Content-Type") 
+  console.log("headers:" + JSON.stringify(resp.headers))
+  const contentType = resp.headers.get("Content-Type".toLowerCase()) 
 
   const reactToOutput = responseBody =>
     onResponseStatus(responseStatus, setStateCallback, responseBody, showError)
   
+    if (!contentType) {
+      setStateCallback()
+    }
+
     contentType.includes("application/json") 
     ? resp.json().then(reactToOutput)
     : resp.text().then(reactToOutput)

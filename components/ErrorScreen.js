@@ -30,7 +30,7 @@ const ErrorScreen = () => {
           borderWidth: 2,
           alignItems: 'center',
           display: 'flex',
-          borderRadius: '15',
+          borderRadius: 15,
           width: '60%',
           height: '10%' 
           }}>
